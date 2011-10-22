@@ -33,6 +33,9 @@ public class Movie
 	/** Production year of the movie. */
 	public String productionYear;
 	
+	/** Show URL on Finnkino.fi */
+	public String showUrl;
+	
 	/** Length of the movie in minutes. */
 	public int lengthInMinutes;
 	

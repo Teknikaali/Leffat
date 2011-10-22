@@ -97,7 +97,7 @@ public class XmlParser
 						++index;
 					}
 					// Parse dates for easier use
-					else if (xpp.getName() == "dttmShowStart") {
+					else if (xpp.getName().equals("dttmShowStart")) {
 						String temp = xpp.nextText();
 						
 						if (temp != null && temp != "") {
@@ -130,31 +130,35 @@ public class XmlParser
 						}
 					}
 					// Get movie title
-					else if (xpp.getName() == "Title") {
+					else if (xpp.getName().equals("Title")) {
 						movies.get(index).title = xpp.nextText();
 					}
 					// Get original title of the movie (in case it was translated)
-					else if (xpp.getName() == "OriginalTitle") {
+					else if (xpp.getName().equals("OriginalTitle")) {
 						movies.get(index).originalTitle = xpp.nextText();
 					}
 					// Get production year
-					else if (xpp.getName() == "ProductionYear") {
+					else if (xpp.getName().equals("ProductionYear")) {
 						movies.get(index).productionYear = xpp.nextText();
 					}
+					// Get show URL
+					else if (xpp.getName().equals("ShowURL")) {
+						movies.get(index).showUrl = xpp.nextText();
+					}
 					// Get length in minutes (integer, not string)
-					else if (xpp.getName() == "LengthInMinutes") {
+					else if (xpp.getName().equals("LengthInMinutes")) {
 						movies.get(index).lengthInMinutes = Integer.parseInt(xpp.nextText());
 					}
 					// Get rating label
-					else if (xpp.getName() == "RatingLabel") {
+					else if (xpp.getName().equals("RatingLabel")) {
 						movies.get(index).rating = xpp.nextText();
 					}
 					// Get image URL for the rating label
-					else if (xpp.getName() == "RatingImageUrl") {
+					else if (xpp.getName().equals("RatingImageUrl")) {
 						movies.get(index).ratingImageUrl = xpp.nextText();
 					}
 					// Get genres, explode them and add into an arraylist one by one
-					else if (xpp.getName() == "Genres") {
+					else if (xpp.getName().equals("Genres")) {
 						String temp = xpp.nextText();
 						
 						movies.get(index).genres.add(new String());
@@ -176,19 +180,19 @@ public class XmlParser
 						movies.get(index).genres.set(genreIndex, temp2);
 					}
 					// Get theatre
-					else if (xpp.getName() == "Theatre") {
+					else if (xpp.getName().equals("Theatre")) {
 						movies.get(index).theatre = xpp.nextText();
 					}
 					// Get auditorium
-					else if (xpp.getName() == "TheatreAuditorioum") {
+					else if (xpp.getName().equals("TheatreAuditorioum")) {
 						movies.get(index).theatreAuditorium = xpp.nextText();
 					}
 					// Get small promotional image of the movie
-					else if (xpp.getName() == "EventSmallImagePortrait") {
+					else if (xpp.getName().equals("EventSmallImagePortrait")) {
 						movies.get(index).smallImageUrl = xpp.nextText();
 					}
 					// Get larger promotional image of the movie
-					else if (xpp.getName() == "EventLargeImagePortrait") {
+					else if (xpp.getName().equals("EventLargeImagePortrait")) {
 						movies.get(index).largeImageUrl = xpp.nextText();
 					}
 				}
