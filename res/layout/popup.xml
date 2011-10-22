@@ -86,12 +86,29 @@
 
     </TableRow>
 
-    <ImageView
-        android:id="@+id/rating"
+    <TableRow
+        android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tableRow2"
-        android:layout_marginTop="5px"
-        android:src="@drawable/icon" />
+        android:layout_below="@id/tableRow2" >
+
+        <ImageView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:src="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/url"
+            android:autoLink="web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_gravity="center_vertical"
+        	android:textColor="#ffcb05"
+            android:text="TextView" />
+
+    </TableRow>
 
 </RelativeLayout>

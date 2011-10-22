@@ -408,11 +408,9 @@ public class MainActivity extends Activity
     		String productionYear = parser.getMovie(groupPosition, childPosition).productionYear;
     		String ratingImage = parser.getMovie(groupPosition, childPosition).ratingImageUrl;
     		String movieThumbnail = parser.getMovie(groupPosition, childPosition).largeImageUrl;
+    		String url = parser.getMovie(groupPosition, childPosition).showUrl;
     		
-			/*
-			 * Send information in Bundle
-			 * - movie name
-			 */
+			//Send information in Bundle
     		Bundle movieBundle = new Bundle();
     		movieBundle.putString("originalName", originalName);
     		movieBundle.putString("translatedName", translatedName);
@@ -420,6 +418,7 @@ public class MainActivity extends Activity
     		movieBundle.putString("productionYear", productionYear);
     		movieBundle.putString("ratingImage", ratingImage);
     		movieBundle.putString("movieThumbnail", movieThumbnail);
+    		movieBundle.putString("url", url);
     		
     		Intent popupIntent = new Intent(context, PopupActivity.class);
     		popupIntent.putExtras(movieBundle);
