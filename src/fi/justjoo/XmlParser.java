@@ -161,23 +161,19 @@ public class XmlParser
 					else if (xpp.getName().equals("Genres")) {
 						String temp = xpp.nextText();
 						
-						movies.get(index).genres.add(new String());
 						String temp2 = "";
-						int genreIndex = 0;
 						
 						for (int j = 0; j < temp.length(); ++j) {
 							if (temp.charAt(j) == ',') {
-								movies.get(index).genres.set(genreIndex, temp2);
-								
-								movies.get(index).genres.add(new String());
+								movies.get(index).genres.add(temp2);
 								temp2 = "";
 							}
-							else {
+							else if (temp.charAt(j) != ' ') {
 								temp2 += temp.charAt(j);
 							}
 						}
 						
-						movies.get(index).genres.set(genreIndex, temp2);
+						movies.get(index).genres.add(temp2);
 					}
 					// Get theatre
 					else if (xpp.getName().equals("Theatre")) {
