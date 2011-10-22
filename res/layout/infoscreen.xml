@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+ 	android:orientation="vertical"
+ 	android:layout_width="280dip"
+ 	android:layout_height="300dip"
+ 	android:background="@android:color/black">
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="16dip"
+			android:text="Leffan nimi"
+			android:textStyle="bold"
+			android:id="@+id/loadingText"
+			android:layout_gravity="center_horizontal"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="11dip"
+			android:text="Tuotantovuosi"
+			android:id="@+id/loadingText"
+			android:layout_gravity="center_horizontal"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginTop="15dip"
+		android:layout_marginLeft="10dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Alkup. nimi: "
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Elokuva"
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+		android:layout_marginLeft="10dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Genre: "
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Toiminta, kauhu"
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+		android:layout_marginLeft="10dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Kesto: "
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="120 min"
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+		android:layout_marginLeft="10dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Teatteri: "
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Plevna"
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+		android:layout_marginLeft="10dip">
+         
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="Sali: "
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:textColor="#ffcb05"
+			android:layout_width="wrap_content"
+			android:textSize="13dip"
+			android:text="4"
+			android:id="@+id/loadingText"
+			android:layout_height="wrap_content">
+		</TextView>
+    </TableRow>
+    
+</TableLayout>

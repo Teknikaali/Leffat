@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JustJoo</string>
+    <string name="basemenu"></string>
+    <string name="day">Maanantai</string>
+    <string name="day1">Tiistai</string>
+    <string name="day2">Keskiviikko</string>
+    <string name="day3">Torstai</string>
+    <string name="day4">Perjantai</string>
+    <string name="day5">Lauantai</string>
+    <string name="day6">Sunnuntai</string>
+    
+    <string name="loadingText_0">Valmistellaan latausta</string>
+    <string name="loadingText_1">Ladataan näytöstietoja</string>
+    <string name="loadingText_2">Käsitellään näytöstietoja</string>
+    <string name="loadingText_3">Generoidaan käyttöliittymää</string>
+    
+    <string name="error_title">Virhe!</string>
+    
+    <string name="success">ONNISTUI</string>
+    <string name="err_areacode">Aluekoodia ei ole määritelty.</string>
+    <string name="err_invalid_url">Väärä URL.</string>
+    <string name="err_no_connection">Ei yhteyttä.</string>
+    <string name="err_istream">Ei voitu avata sisääntuloa Internetistä.</string>
+    <string name="err_ostream">Ei voitu avata ulostuloa järjestelmään.</string>
+    <string name="err_io_exception">Yllättävä IOException.</string>
+    
+    
+</resources>

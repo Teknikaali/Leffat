@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JustJoo</string>
+    <string name="basemenu"></string>
+    <string name="day">Måndag</string>
+    <string name="day1">Tisdag</string>
+    <string name="day2">Onsdag</string>
+    <string name="day3">Torsdag</string>
+    <string name="day4">Fredag</string>
+    <string name="day5">Lördag</string>
+    <string name="day6">Söndag</string>
+    
+    <string name="loadingText_0">Ansluthing till Finnkino.fi</string>
+    <string name="loadingText_1">Lastning visa information</string>
+    <string name="loadingText_2">Hantering show information</string>
+    <string name="loadingText_3">Skapa användargränssnitt</string>
+    
+    <string name="error_title">Fel!</string>
+    
+    <string name="success">SUCCE</string>
+    <string name="err_areacode">Inga riktnummer definierade.</string>
+    <string name="err_invalid_url">Felaktig URL.</string>
+    <string name="err_no_connection">Ingen anslutning.</string>
+    <string name="err_istream">Kan inte öppna ingång ström över Internet.</string>
+    <string name="err_ostream">Kan inte öppna utdataström till filsystemet.</string>
+    <string name="err_io_exception">Oväntat IOException.</string>
+</resources>

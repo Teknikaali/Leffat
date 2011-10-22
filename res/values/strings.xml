@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JustJoo</string>
+    <string name="basemenu"></string>
+    <string name="day" >Monday</string>
+    <string name="day1">Tuesday</string>
+    <string name="day2">Wednesday</string>
+    <string name="day3">Thursday</string>
+    <string name="day4">Friday</string>
+    <string name="day5">Saturday</string>
+    <string name="day6">Sunday</string>
+    
+    <string name="loadingText_0">Preparing for loading</string>
+    <string name="loadingText_1">Loading show information</string>
+    <string name="loadingText_2">Handling show information</string>
+    <string name="loadingText_3">Generating user interface</string>
+    
+    <string name="error_title">Error!</string>
+    
+    <string name="success">SUCCESS</string>
+    <string name="err_areacode">No area code defined.</string>
+    <string name="err_invalid_url">Invalid URL.</string>
+    <string name="err_no_connection">No connection.</string>
+    <string name="err_istream">Cannot open input stream over the Internet.</string>
+    <string name="err_ostream">Cannot open output stream to the file system.</string>
+    <string name="err_io_exception">Unexpected IOException.</string>
+    
+    <string name="settings_title">Settings</string>
+    
+    <string name="areacodes">Choose an area/theater</string>
+    <string-array name="areacode_array">
+        <item>Pääkaupunkiseutu</item>
+        <item>Espoo</item>
+        <item>Helsinki</item>
+        <item>Helsinki :: Kinopalatsi</item>
+        <item>Helsinki :: Maxim</item>
+        <item>Helsinki :: Tennispalatsi</item>
+        <item>Jyväskylä</item>
+        <item>Kuopio</item>
+        <item>Lahti</item>
+        <item>Oulu</item>
+        <item>Pori</item>
+        <item>Rovaniemi</item>
+        <item>Tampere</item>
+        <item>Tampere :: Cine Atlas</item>
+        <item>Tampere :: Plevna</item>
+        <item>Turku</item>
+        <item>Vantaa</item>
+    </string-array>
+    
+    <string name="year">Production year: </string>
+    <string name="genre">Genre: </string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JustJoo</string>
+    <string name="basemenu"></string>
+    <string name="day" >Montag</string>
+    <string name="day1">Dienstag</string>
+    <string name="day2">Mittwoch</string>
+    <string name="day3">Donnerstag</string>
+    <string name="day4">Freitag</string>
+    <string name="day5">Samstag</string>
+    <string name="day6">Sonntag</string>
+    
+    <string name="loadingText_0">Anschluss an Finnkino.fi</string>
+    <string name="loadingText_1">Laden zeigen Informationen</string>
+    <string name="loadingText_2">Umgang mit Informationen anzeigen</string>
+    <string name="loadingText_3">Erzeugung Benutzeroberfläche</string>
+    
+    <string name="error_title">Fehler!</string>
+    
+    <string name="success">ERFOLG</string>
+    <string name="err_areacode">Keine Vorwahl definiert.</string>
+    <string name="err_invalid_url">Ungültige URL.</string>
+    <string name="err_no_connection">Keine Verbindung.</string>
+    <string name="err_istream">Kann nicht geöffnet werden Input-Stream über das Internet.</string>
+    <string name="err_ostream">Kann nicht geöffnet werden Output-Stream auf das Dateisystem.</string>
+    <string name="err_io_exception">Unerwartet IOException.</string>
+    
+   
+</resources>
