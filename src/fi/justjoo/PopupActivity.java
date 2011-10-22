@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ public class PopupActivity extends Activity
 	private String translatedName;
 	private String genres;
 	private String productionYear;
+	private String url;
 	
 	private static Context context;
 	
@@ -52,6 +54,7 @@ public class PopupActivity extends Activity
 		translatedName = bundle.getString("translatedName");
 		genres = bundle.getString("genres");
 		productionYear = bundle.getString("productionYear");
+		url = bundle.getString("url");
 		
 		Thread imageThread = new Thread()
 		{
@@ -100,6 +103,10 @@ public class PopupActivity extends Activity
 		
 		TextView year = (TextView) findViewById(R.id.year);
 		year.setText(productionYear);
+		
+		TextView movieUrl = (TextView) findViewById(R.id.url);
+		movieUrl.setText(url);
+		//movieUrl.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 }
