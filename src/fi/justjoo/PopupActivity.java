@@ -106,7 +106,6 @@ public class PopupActivity extends Activity
 		
 		TextView movieUrl = (TextView) findViewById(R.id.url);
 		movieUrl.setText(url);
-		//movieUrl.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 }
