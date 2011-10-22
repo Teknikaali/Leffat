@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dip"
+    android:layout_width="250dip"
     android:layout_height="200dip"
     android:background="@drawable/newback"
     android:orientation="vertical" >
@@ -15,7 +15,7 @@
         android:id="@+id/translated_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/movie_thumbnail"
         android:text="Käänn. nimi"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/translated_name"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/movie_thumbnail"
         android:text="Alkup. nimi"
         android:textColor="#ffcb05"
