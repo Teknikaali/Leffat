@@ -10,7 +10,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 import android.util.Xml;
 
 /**

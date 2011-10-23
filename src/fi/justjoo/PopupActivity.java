@@ -10,8 +10,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +26,7 @@ public class PopupActivity extends Activity
 	private String productionYear;
 	private String url;
 	
+	@SuppressWarnings("unused")
 	private static Context context;
 	
 	@Override
