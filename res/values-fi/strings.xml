@@ -28,5 +28,30 @@
     <string name="err_ostream">Ei voitu avata ulostuloa järjestelmään.</string>
     <string name="err_io_exception">Yllättävä IOException.</string>
     
+    <string name="settings_title">Asetukset</string>
+    
+    <string name="areacodes">Valitse alue/teatteri</string>
+    <string-array name="areacode_array">
+        <item>Pääkaupunkiseutu</item>
+        <item>Espoo</item>
+        <item>Helsinki</item>
+        <item>Helsinki :: Kinopalatsi</item>
+        <item>Helsinki :: Maxim</item>
+        <item>Helsinki :: Tennispalatsi</item>
+        <item>Jyväskylä</item>
+        <item>Kuopio</item>
+        <item>Lahti</item>
+        <item>Oulu</item>
+        <item>Pori</item>
+        <item>Rovaniemi</item>
+        <item>Tampere</item>
+        <item>Tampere :: Cine Atlas</item>
+        <item>Tampere :: Plevna</item>
+        <item>Turku</item>
+        <item>Vantaa</item>
+    </string-array>
+    
+    <string name="year">Tuotantovuosi: </string>
+    <string name="genre">Genre: </string>
     
 </resources>

@@ -29,7 +29,7 @@
     
     <string name="areacodes">Choose an area/theater</string>
     <string-array name="areacode_array">
-        <item>Pääkaupunkiseutu</item>
+        <item>Greater Helsinki</item>
         <item>Espoo</item>
         <item>Helsinki</item>
         <item>Helsinki :: Kinopalatsi</item>
