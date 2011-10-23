@@ -372,8 +372,6 @@ public class MainActivity extends Activity
 	        
 	        dayCount++;
     	}
-    	
-    	myExpandableAdapter temp = adapter;
     }
     
     /**
