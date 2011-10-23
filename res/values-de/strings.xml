@@ -17,6 +17,9 @@
     
     <string name="error_title">Fehler!</string>
     
+    <string name="accept_button">Akzeptieren</string>
+    <string name="cancel_button">Kündigen</string>
+    
     <string name="success">ERFOLG</string>
     <string name="err_areacode">Keine Vorwahl definiert.</string>
     <string name="err_invalid_url">Ungültige URL.</string>
