@@ -48,6 +48,9 @@
         <item>Vantaa</item>
     </string-array>
     
+    <string name="accept_button">Accept</string>
+    <string name="cancel_button">Cancel</string>
+    
     <string name="year">Production year: </string>
     <string name="genre">Genre: </string>
 </resources>

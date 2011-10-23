@@ -17,6 +17,9 @@
     
     <string name="error_title">Fel!</string>
     
+    <string name="accept_button">Acceptera</string>
+    <string name="cancel_button">Avbryt</string>
+    
     <string name="success">SUCCE</string>
     <string name="err_areacode">Inga riktnummer definierade.</string>
     <string name="err_invalid_url">Felaktig URL.</string>
