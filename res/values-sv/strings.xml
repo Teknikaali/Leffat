@@ -20,7 +20,7 @@
     <string name="accept_button">Acceptera</string>
     <string name="cancel_button">Avbryt</string>
     
-    <string name="success">SUCCE</string>
+    <string name="success">SUCCESS</string>
     <string name="err_areacode">Inga riktnummer definierade.</string>
     <string name="err_invalid_url">Felaktig URL.</string>
     <string name="err_no_connection">Ingen anslutning.</string>

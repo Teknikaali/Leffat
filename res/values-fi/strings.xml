@@ -20,7 +20,7 @@
     <string name="accept_button">Hyväksy</string>
     <string name="cancel_button">Peru</string>
     
-    <string name="success">ONNISTUI</string>
+    <string name="success">SUCCESS</string>
     <string name="err_areacode">Aluekoodia ei ole määritelty.</string>
     <string name="err_invalid_url">Väärä URL.</string>
     <string name="err_no_connection">Ei yhteyttä.</string>
