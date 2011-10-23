@@ -1,4 +1,4 @@
-package fi.justjoo;
+package fi.leffat;
 
 import java.io.File;
 
@@ -97,6 +97,5 @@ public class Cleaner
 		}
 		
 		files = _dir.list();
-		int a = 0;
 	}
 }

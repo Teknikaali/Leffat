@@ -1,4 +1,4 @@
-package fi.justjoo;
+package fi.leffat;
 
 import java.io.IOException;
 import java.io.InputStream;

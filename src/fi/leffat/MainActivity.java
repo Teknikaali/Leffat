@@ -1,4 +1,4 @@
-package fi.justjoo;
+package fi.leffat;
 
 import java.util.ArrayList;
 
@@ -138,6 +138,12 @@ public class MainActivity extends Activity
         SharedPreferences leffaPrefs = context.getSharedPreferences("leffaPrefs", MODE_WORLD_READABLE);
         final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
         
+        if (leffaPrefs.getString("AREA_CODE", null) == null) {
+            prefsEditor.putString("AREA_CODE", "1014");
+	        prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
+            prefsEditor.commit();
+        }
+        
         /**
          * Configuration dialog
          */
@@ -226,7 +232,7 @@ public class MainActivity extends Activity
     	        prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
                 prefsEditor.commit();
 
-    			Toast.makeText(context, "The area code is " + areacode, Toast.LENGTH_LONG).show();
+    			//Toast.makeText(context, "The area code is " + areacode, Toast.LENGTH_LONG).show();
                 
     			configDialog.dismiss();
     			configDialog.hide();
