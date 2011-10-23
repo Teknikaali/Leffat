@@ -11,6 +11,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.util.Log;
 
 /**
  * FileLoader is responsible for loading the XML-file from FinnKino's websites.
@@ -154,6 +155,7 @@ public class FileLoader
 		if (!fileAlreadyExists) {
 			URL url;
 			try {
+				Log.e("USING URL", "http://www.finnkino.fi/xml/Schedule/?area="+areaCode+"&dt=" + days[_dayIndex]);
 				url = new URL("http://www.finnkino.fi/xml/Schedule/?area="+areaCode+"&dt=" + days[_dayIndex]);
 			}
 			catch (Exception e) {

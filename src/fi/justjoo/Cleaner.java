@@ -95,5 +95,8 @@ public class Cleaner
 		for (int i = files.length - 1; i >= 0; --i) {
 			new File(_dir, files[i]).delete();
 		}
+		
+		files = _dir.list();
+		int a = 0;
 	}
 }

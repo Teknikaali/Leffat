@@ -17,7 +17,8 @@ public class myExpandableAdapter extends BaseExpandableListAdapter {
 
 	private Context context;
 
-	public myExpandableAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<ArrayList<String>>> children) {
+	public myExpandableAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<ArrayList<String>>> children)
+	{
         this.context = context;
         this.groups = groups;
         this.children = children;

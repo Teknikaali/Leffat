@@ -33,8 +33,6 @@ public class XmlParser
 	 * ============================================ */
 	public XmlParser()
 	{
-		days = new ArrayList<ArrayList<Movie>>(7);
-		
 		int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 		
 		// Format the current date
@@ -65,6 +63,10 @@ public class XmlParser
 		
 		ArrayList<Movie> movies = new ArrayList<Movie>();
 		int index = -1;
+		
+		if (dayIndex == 0) {
+			days = new ArrayList<ArrayList<Movie>>(7);
+		}
 
 		// Define the file path
 		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {

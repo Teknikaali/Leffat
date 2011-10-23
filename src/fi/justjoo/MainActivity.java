@@ -102,6 +102,15 @@ public class MainActivity extends Activity
     	isDone = false;
 
         setContentView(R.layout.main);
+
+        movieExpendableList = (ExpandableListView) findViewById(R.id.ExpandableListView_leffalista);
+        movieExpendableList.setOnChildClickListener(new OnChildClick());
+        
+		groups = new ArrayList<String>();
+		childs = new ArrayList<ArrayList<ArrayList<String>>>();
+		adapter = new myExpandableAdapter(this, groups, childs);
+		
+		movieExpendableList.setAdapter(adapter);
     }
     
     private static boolean isDone;
@@ -270,10 +279,13 @@ public class MainActivity extends Activity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if (resultCode == RESULT_OK || resultCode == -2) {
+			groups.clear();
+			childs.clear();
+			
 			generateView();
-
-	    	adapter = new myExpandableAdapter(this, groups, childs);
-			movieExpendableList.setAdapter(adapter);
+			
+			movieExpendableList.invalidateViews();
+			movieExpendableList.requestLayout();
 		}
 		else if (resultCode == 0) {
 			// Configure dialog
@@ -294,12 +306,6 @@ public class MainActivity extends Activity
         Date anotherCurDate = new Date();  
         DateFormat formatter = new SimpleDateFormat("E", Locale.ENGLISH);
         String currentDay = formatter.format(anotherCurDate);
-
-        movieExpendableList = (ExpandableListView) findViewById(R.id.ExpandableListView_leffalista);
-        groups = new ArrayList<String>();
-    	childs = new ArrayList<ArrayList<ArrayList<String>>>();
-
-        movieExpendableList.setOnChildClickListener(new OnChildClick());
     	
     	// Table to recognize days of week
     	final String dayTable[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -366,6 +372,8 @@ public class MainActivity extends Activity
 	        
 	        dayCount++;
     	}
+    	
+    	myExpandableAdapter temp = adapter;
     }
     
     /**
