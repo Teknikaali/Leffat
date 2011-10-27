@@ -90,8 +90,6 @@ public class Movie implements Parcelable
 	 */
 	public Bitmap getSmallImage(Context _context)
 	{
-		Bitmap bmp;
-		
 		if (smallImageUrl.length() > 0) {
 			try {
 				URL ulrn = new URL(smallImageUrl);
@@ -99,7 +97,7 @@ public class Movie implements Parcelable
 				con.setDoInput(true);
 				con.connect();
 				InputStream is = con.getInputStream();
-				bmp = BitmapFactory.decodeStream(is);
+				Bitmap bmp = BitmapFactory.decodeStream(is);
 				
 				if (bmp != null) {
 					return bmp;
@@ -109,7 +107,7 @@ public class Movie implements Parcelable
 			}
 		}
 		
-		return null;
+		return BitmapFactory.decodeResource(_context.getResources(), R.drawable.no_movie_img_found);
 	}
 	
 	/**
@@ -124,8 +122,6 @@ public class Movie implements Parcelable
 	 */
 	public Bitmap getLargeImage(Context _context)
 	{
-		Bitmap bmp;
-		
 		if (largeImageUrl.length() > 0) {
 			try {
 				URL ulrn = new URL(largeImageUrl);
@@ -133,7 +129,7 @@ public class Movie implements Parcelable
 				con.setDoInput(true);
 				con.connect();
 				InputStream is = con.getInputStream();
-				bmp = BitmapFactory.decodeStream(is);
+				Bitmap bmp = BitmapFactory.decodeStream(is);
 				
 				if (bmp != null) {
 					return bmp;
@@ -143,7 +139,7 @@ public class Movie implements Parcelable
 			}
 		}
 		
-		return null;
+		return BitmapFactory.decodeResource(_context.getResources(), R.drawable.no_movie_img_found);
 	}
 	
 	/**
