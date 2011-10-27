@@ -11,6 +11,9 @@ import android.os.Environment;
  */
 public class Cleaner
 {
+	/* ============================================
+	 *  New methods
+	 * ============================================ */
 	/**
 	 * Executes the deletion process.
 	 * 

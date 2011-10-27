@@ -28,6 +28,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcel;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -92,6 +93,9 @@ public class MainActivity extends Activity
     
     private Dialog configDialog;
 
+	/* ============================================
+	 *  Inherited methods
+	 * ============================================ */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -128,13 +132,12 @@ public class MainActivity extends Activity
         
         context = this;
         
+        // Create XmlParser
         if (parser == null) {
         	parser = new XmlParser();
         }
         
-        /**
-         * Preference-editor
-         */
+        // Check areacode
         SharedPreferences leffaPrefs = context.getSharedPreferences("leffaPrefs", MODE_WORLD_READABLE);
         final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
         
@@ -147,7 +150,6 @@ public class MainActivity extends Activity
         /**
          * Configuration dialog
          */
-        
         // Set up the base dialog
     	configDialog = new Dialog(MainActivity.this);
     	configDialog.setContentView(R.layout.customdialog);
@@ -247,14 +249,6 @@ public class MainActivity extends Activity
     			configDialog.hide();
     		}
     	});
-        
-        /**
-         * End of Configuration dialog
-         */
-        
-//        if (leffaPrefs.getString("AREA_CODE", null) == null) {
-//            configDialog.show();
-//        }
 		
 		// Create listener for refresh-button
 		ImageButton refresh = (ImageButton) findViewById(R.id.refresh_button);
@@ -282,6 +276,11 @@ public class MainActivity extends Activity
         }
     }
 	
+	/**
+	 * When another activity ends, this function will be called automatically.
+	 * This will check the result value and either regenerate the list or
+	 * open settings window.
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if (resultCode == RESULT_OK || resultCode == -2) {
@@ -294,12 +293,52 @@ public class MainActivity extends Activity
 			movieExpendableList.requestLayout();
 		}
 		else if (resultCode == 0) {
-			// Configure dialog
 			configDialog.show();
-			//Toast.makeText(context, "NÄYTÄ CONFIG-DIALOGI", Toast.LENGTH_LONG).show();
 		}
 	}
     
+    /**
+     * Listener for a spinner...
+     */
+    public class OnAreaCodeSelectedListener implements OnItemSelectedListener
+	{
+		public void onItemSelected(AdapterView<?> parent,
+				View view, int pos, long id) {
+			
+			// Save the selection to a variable
+			areacode = parent.getItemAtPosition(pos).toString();
+			areacodeSelectionPosition = pos;
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public void onNothingSelected(AdapterView parent) {
+			// Do nothing ...
+		}
+	}
+    
+    /**
+     * Listener for a ExpandableList child listener. When a movie is clicked,
+     * an information popup will be shown.
+     */
+    public class OnChildClick implements OnChildClickListener
+    {
+    	public boolean onChildClick(ExpandableListView parent, View v,
+									int groupPosition, int childPosition, long id)
+    	{
+    		Bundle movieBundle = new Bundle();
+    		movieBundle.putParcelable("movie", parser.getMovie(groupPosition, childPosition));
+    		
+    		Intent popupIntent = new Intent(context, InfoActivity.class);
+    		popupIntent.putExtras(movieBundle);
+    		startActivity(popupIntent);
+    		
+			return true;
+		}
+    }
+
+	/* ============================================
+	 *  New methods
+	 * ============================================ */
     /**
      * Initializes the groups and childs
      */
@@ -378,64 +417,5 @@ public class MainActivity extends Activity
 	        
 	        dayCount++;
     	}
-    }
-    
-    /**
-     * Listener for a spinner
-     * 
-     * @author Teknikaali
-     *
-     */
-    public class OnAreaCodeSelectedListener implements OnItemSelectedListener
-	{
-		public void onItemSelected(AdapterView<?> parent,
-				View view, int pos, long id) {
-			
-			// Save the selection to a variable
-			areacode = parent.getItemAtPosition(pos).toString();
-			areacodeSelectionPosition = pos;
-		}
-		
-		@SuppressWarnings("rawtypes")
-		public void onNothingSelected(AdapterView parent) {
-			// Do nothing ...
-		}
-	}
-    
-    /**
-     * Listener for a ExpandableList child listener
-     * 
-     * @author trashed
-     *
-     */
-    public class OnChildClick implements OnChildClickListener
-    {
-    	public boolean onChildClick(ExpandableListView parent, View v,
-				int groupPosition, int childPosition, long id) {
-    		
-    		// Variables for a selected movie to pass forward in a Bundle 
-    		String originalName = parser.getMovie(groupPosition, childPosition).originalTitle;
-    		String translatedName = parser.getMovie(groupPosition, childPosition).title;
-    		String genres = parser.getMovie(groupPosition, childPosition).getGenres();
-    		String productionYear = parser.getMovie(groupPosition, childPosition).productionYear;
-    		String ratingImage = parser.getMovie(groupPosition, childPosition).ratingImageUrl;
-    		String movieThumbnail = parser.getMovie(groupPosition, childPosition).largeImageUrl;
-    		String url = parser.getMovie(groupPosition, childPosition).showUrl;
-    		
-			//Send information in Bundle
-    		Bundle movieBundle = new Bundle();
-    		movieBundle.putString("originalName", originalName);
-    		movieBundle.putString("translatedName", translatedName);
-    		movieBundle.putString("genres", genres);
-    		movieBundle.putString("productionYear", productionYear);
-    		movieBundle.putString("ratingImage", ratingImage);
-    		movieBundle.putString("movieThumbnail", movieThumbnail);
-    		movieBundle.putString("url", url);
-    		
-    		Intent popupIntent = new Intent(context, PopupActivity.class);
-    		popupIntent.putExtras(movieBundle);
-    		startActivity(popupIntent);
-			return false;
-		}
     }
 }

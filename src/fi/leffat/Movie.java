@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Movie is class tha holds all the information of one individual show.
  */
-public class Movie
+public class Movie implements Parcelable
 {
 	/** Start day of the show. */
 	public String showStartDate;
@@ -23,6 +24,8 @@ public class Movie
 	
 	/** Start time (minute) of the show. */
 	public String showStartTimeM;
+	
+	public String parsedTime;
 	
 	/** Current title of the movie (may be translated). */
 	public String title;
@@ -47,6 +50,7 @@ public class Movie
 	
 	/** All different genres of the movie. */
 	public ArrayList<String> genres;
+	public String parsedGenres;
 	
 	/** Theatre of the show. */
 	public String theatre;
@@ -75,73 +79,100 @@ public class Movie
 	 *  Accessors
 	 * ============================================ */
 	/**
-	 * Downloads the small movie image from Finnkino.fi and returns
-	 * it as an ImageView.<br><br>
+	 * Downloads the small movie image from Finnkino.fi and returns it as a Bitmap.<br><br>
 	 * 
 	 * If the image is not found, there is no internet connection or some other
 	 * error occurred, the default image is used instead (no_movie_img_found.png).
 	 * 
 	 * @param _context Application context (use getApplicationContext() for this)
 	 * 
-	 * @return ImageView containing the image
+	 * @return Bitmap containing the image
 	 */
-	public ImageView getSmallImage(Context _context)
+	public Bitmap getSmallImage(Context _context)
 	{
-		ImageView iv = new ImageView(_context);
+		Bitmap bmp;
 		
 		if (smallImageUrl.length() > 0) {
 			try {
 				URL ulrn = new URL(smallImageUrl);
 				HttpURLConnection con = (HttpURLConnection) ulrn.openConnection();
+				con.setDoInput(true);
+				con.connect();
 				InputStream is = con.getInputStream();
-				Bitmap bmp = BitmapFactory.decodeStream(is);
+				bmp = BitmapFactory.decodeStream(is);
 				
 				if (bmp != null) {
-					iv.setImageBitmap(bmp);
-					return iv;
+					return bmp;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		iv.setImageResource(R.drawable.no_movie_img_found);
-		
 		return null;
 	}
 	
 	/**
-	 * Downloads the large movie image from Finnkino.fi and returns
-	 * it as an ImageView.<br><br>
+	 * Downloads the large movie image from Finnkino.fi and returns it as a Bitmap.<br><br>
 	 * 
 	 * If the image is not found, there is no internet connection or some other
 	 * error occurred, the default image is used instead (no_movie_img_found.png).
 	 * 
 	 * @param _context Application context (use getApplicationContext() for this)
 	 * 
-	 * @return ImageView containing the image
+	 * @return Bitmap containing the image
 	 */
-	public ImageView getLargeImage(Context _context)
+	public Bitmap getLargeImage(Context _context)
 	{
-		ImageView iv = new ImageView(_context);
+		Bitmap bmp;
 		
 		if (largeImageUrl.length() > 0) {
 			try {
 				URL ulrn = new URL(largeImageUrl);
 				HttpURLConnection con = (HttpURLConnection) ulrn.openConnection();
+				con.setDoInput(true);
+				con.connect();
 				InputStream is = con.getInputStream();
-				Bitmap bmp = BitmapFactory.decodeStream(is);
+				bmp = BitmapFactory.decodeStream(is);
 				
 				if (bmp != null) {
-					iv.setImageBitmap(bmp);
-					return iv;
+					return bmp;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		iv.setImageResource(R.drawable.no_movie_img_found);
+		return null;
+	}
+	
+	/**
+	 * Downloads the rating image from Finnkino.fi and returns it as a Bitmap.
+	 * 
+	 * @param _context Application context (use getApplicationContext() for this)
+	 * 
+	 * @return Bitmap containing the image
+	 */
+	public Bitmap getRatingImage(Context _context)
+	{
+		Bitmap bmp;
+		
+		if (ratingImageUrl.length() > 0) {
+			try {
+				URL ulrn = new URL(ratingImageUrl);
+				HttpURLConnection con = (HttpURLConnection) ulrn.openConnection();
+				con.setDoInput(true);
+				con.connect();
+				InputStream is = con.getInputStream();
+				bmp = BitmapFactory.decodeStream(is);
+				
+				if (bmp != null) {
+					return bmp;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}
@@ -153,7 +184,10 @@ public class Movie
 	 */
 	public String getGenres()
 	{
-		if (genres != null) {
+		if (parsedGenres != null) {
+			return parsedGenres;
+		}
+		else if (genres != null) {
 			String all = "";
 			
 			for (int i = 0; i < genres.size(); ++i) {
@@ -177,8 +211,10 @@ public class Movie
 	 */
 	public String getStartTime()
 	{
-		
-		if (showStartTimeH.length() > 0) {
+		if (parsedTime != null) {
+			return parsedTime;
+		}
+		else if (showStartTimeH.length() > 0) {
 			String time = showStartTimeH + ":";
 			
 			if (showStartTimeM.length() > 0) {
@@ -193,5 +229,64 @@ public class Movie
 		else {
 			return "ERROR";
 		}
+	}
+	
+	/* ============================================
+	 *  Interface methods
+	 * ============================================ */
+	public int describeContents()
+	{
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags)
+	{
+		dest.writeString(showStartDate);
+		dest.writeString(getStartTime());
+		dest.writeString(title);
+		dest.writeString(originalTitle);
+		dest.writeString(productionYear);
+		dest.writeString(showUrl);
+		dest.writeInt(lengthInMinutes);
+		dest.writeString(rating);
+		dest.writeString(ratingImageUrl);
+		dest.writeString(getGenres());
+		dest.writeString(theatre);
+		dest.writeString(theatreAuditorium);
+		dest.writeString(smallImageUrl);
+		dest.writeString(largeImageUrl);
+	}
+	
+	public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
+	{
+		public Movie createFromParcel(Parcel in)
+		{
+			return new Movie(in);
+		}
+		
+		public Movie[] newArray(int size)
+		{
+			return new Movie[size];
+		}
+	};
+	
+	private Movie(Parcel in)
+	{
+		genres = new ArrayList<String>();
+		
+		showStartDate     = in.readString();
+		parsedTime        = in.readString();
+		title             = in.readString();
+		originalTitle     = in.readString();
+		productionYear    = in.readString();
+		showUrl           = in.readString();
+		lengthInMinutes   = in.readInt();
+		rating            = in.readString();
+		ratingImageUrl    = in.readString();
+		parsedGenres      = in.readString();
+		theatre           = in.readString();
+		theatreAuditorium = in.readString();
+		smallImageUrl     = in.readString();
+		largeImageUrl     = in.readString();
 	}
 }

@@ -9,10 +9,17 @@ import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+// TODO Kommentoi
 public class LoadActivity extends Activity
 {
+	/**
+	 * Activity context.
+	 */
 	private static Context context;
-	
+
+	/* ============================================
+	 *  Inherited methods
+	 * ============================================ */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -32,7 +39,10 @@ public class LoadActivity extends Activity
 		
 		loadShowData();
 	}
-	
+
+	/* ============================================
+	 *  New methods
+	 * ============================================ */
 	/**
 	 * Loads required XML-files from Finnkino.fi and saves them to
 	 */
@@ -84,12 +94,32 @@ public class LoadActivity extends Activity
     	};
     	thread.start();
     }
-    
-	public class Alerter implements Runnable
+
+	/* ============================================
+	 *  Nested classes
+	 * ============================================ */
+    /**
+     * Alerter is a private inner class of LoadActivity and it is responsible for
+     * updating the progress bar and showing alert dialogs if errors occur.
+     */
+	private class Alerter implements Runnable
 	{
+		/**
+		 * Message to show in the alert dialog.
+		 */
 		private String message;
+		
+		/**
+		 * Should config screen be opened after this alert or not.
+		 */
 		private boolean openConfig;
 		
+		/**
+		 * Saves the parameters.
+		 * 
+		 * @param _message    Message to show
+		 * @param _openConfig Open config dialog after this?
+		 */
 		public Alerter(String _message, boolean _openConfig)
 		{
 			message = _message;
