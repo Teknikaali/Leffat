@@ -22,7 +22,7 @@ public class Cleaner
 	 */
 	public void run(Context _context, String[] _reqFiles)
 	{
-		SharedPreferences leffaPrefs = _context.getSharedPreferences("leffaPrefs", Context.MODE_WORLD_READABLE);
+		SharedPreferences leffaPrefs = _context.getSharedPreferences("fi.leffat_preferences", Context.MODE_WORLD_READABLE);
 
 		File dir;
 		

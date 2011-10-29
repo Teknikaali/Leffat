@@ -86,7 +86,7 @@ public class FileLoader
 		context = _context;
 		
 		// Get area code from settings
-		SharedPreferences leffaPrefs = context.getSharedPreferences("leffaPrefs", Context.MODE_WORLD_READABLE);
+		SharedPreferences leffaPrefs = context.getSharedPreferences("fi.leffat_preferences", Context.MODE_WORLD_READABLE);
 		areaCode = leffaPrefs.getString("AREA_CODE", null);
 		
 		if (areaCode == null) {
