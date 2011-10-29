@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<style name="NewBorderDialogTheme" parent="android:Theme.Dialog">
-		<item name="android:windowBackground">@drawable/popup_back</item>
-	</style>
-</resources>

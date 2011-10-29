@@ -85,7 +85,7 @@ public class MainActivity extends Activity
     
     public static XmlParser parser;
     
-    private myExpandableAdapter adapter;
+    private MovieListAdapter adapter;
     
     private ExpandableListView movieExpendableList;
     
@@ -105,14 +105,14 @@ public class MainActivity extends Activity
     	
     	isDone = false;
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.mainscreen);
 
         movieExpendableList = (ExpandableListView) findViewById(R.id.ExpandableListView_leffalista);
         movieExpendableList.setOnChildClickListener(new OnChildClick());
         
 		groups = new ArrayList<String>();
 		childs = new ArrayList<ArrayList<ArrayList<String>>>();
-		adapter = new myExpandableAdapter(this, groups, childs);
+		adapter = new MovieListAdapter(this, groups, childs);
 		
 		movieExpendableList.setAdapter(adapter);
     }
@@ -152,7 +152,7 @@ public class MainActivity extends Activity
          */
         // Set up the base dialog
     	configDialog = new Dialog(MainActivity.this);
-    	configDialog.setContentView(R.layout.customdialog);
+    	configDialog.setContentView(R.layout.configdialog);
     	configDialog.setTitle(R.string.settings_title);
     	configDialog.setCancelable(false);
     	

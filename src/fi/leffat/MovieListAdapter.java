@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class myExpandableAdapter extends BaseExpandableListAdapter {
+public class MovieListAdapter extends BaseExpandableListAdapter {
 	 
 	private ArrayList<String> groups;
 
@@ -17,7 +17,7 @@ public class myExpandableAdapter extends BaseExpandableListAdapter {
 
 	private Context context;
 
-	public myExpandableAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<ArrayList<String>>> children)
+	public MovieListAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<ArrayList<String>>> children)
 	{
         this.context = context;
         this.groups = groups;
@@ -46,7 +46,7 @@ public class myExpandableAdapter extends BaseExpandableListAdapter {
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.expandablelistview_child, null);
+            convertView = infalInflater.inflate(R.layout.movielist_child, null);
         }
 
         TextView childtxt = (TextView) convertView.findViewById(R.id.TextViewChild01);
@@ -78,7 +78,7 @@ public class myExpandableAdapter extends BaseExpandableListAdapter {
 
     	if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.expandablelistview_group, null);
+            convertView = infalInflater.inflate(R.layout.movielist_group, null);
         }
 
         TextView grouptxt = (TextView) convertView.findViewById(R.id.TextViewGroup);
