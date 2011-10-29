@@ -256,7 +256,7 @@ public class MainActivity extends Activity
 			public void onClick(View v)
 			{
         		Intent intent = new Intent(context, LoadActivity.class);
-        		startActivityForResult(intent, 0);
+        		startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -268,10 +268,20 @@ public class MainActivity extends Activity
             	configDialog.show();
 			}
 		});
+		
+		// Create listener for config-button
+		ImageButton search = (ImageButton) findViewById(R.id.search_button);
+		search.setOnClickListener(new OnClickListener() {
+			public void onClick(View v)
+			{
+        		Intent intent = new Intent(context, SearchActivity.class);
+        		startActivityForResult(intent, 2);
+			}
+		});
         
         if (!isDone) {
         	Intent intent = new Intent(this, LoadActivity.class);
-        	startActivityForResult(intent, 0);
+        	startActivityForResult(intent, 1);
         	isDone = true;
         }
     }
@@ -283,17 +293,27 @@ public class MainActivity extends Activity
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if (resultCode == RESULT_OK || resultCode == -2) {
-			groups.clear();
-			childs.clear();
-			
-			generateView();
-			
-			movieExpendableList.invalidateViews();
-			movieExpendableList.requestLayout();
+		// User came back from LoadActivity
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK || resultCode == -2) {
+				groups.clear();
+				childs.clear();
+				
+				generateView();
+				
+				movieExpendableList.invalidateViews();
+				movieExpendableList.requestLayout();
+			}
+			else if (resultCode == 0) {
+				configDialog.show();
+			}
 		}
-		else if (resultCode == 0) {
-			configDialog.show();
+		// User came back from SearchActivity
+		else if (requestCode == 2) {
+			// Movie was selected
+			if (resultCode == RESULT_OK) {
+				// TODO Show info screen
+			}
 		}
 	}
     

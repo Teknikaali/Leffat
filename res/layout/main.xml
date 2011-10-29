@@ -32,6 +32,16 @@
         	android:layout_width="wrap_content" 
         	android:id="@+id/config_button"
         	android:background="@null"
+        	android:layout_marginRight="12dip"
+       		android:layout_marginTop="10dip">
+        </ImageButton>
+        <ImageButton 
+        	android:src="@drawable/search_button" 
+        	android:layout_height="wrap_content" 
+        	android:layout_width="wrap_content" 
+        	android:id="@+id/search_button"
+        	android:background="@null"
+        	android:layout_marginRight="12dip"
        		android:layout_marginTop="10dip">
         </ImageButton>
     </TableRow>
