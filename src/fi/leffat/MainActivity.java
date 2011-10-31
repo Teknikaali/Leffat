@@ -88,6 +88,8 @@ public class MainActivity extends Activity
     private MovieListAdapter adapter;
     
     private ExpandableListView movieExpendableList;
+    
+    private TimeChooserDialog mDialog;
 
 	/* ============================================
 	 *  Inherited methods
@@ -195,7 +197,7 @@ public class MainActivity extends Activity
 			public void onClick(View v)
 			{
 				//TODO: tee dialogi ajan muuttamiselle valmiiksi
-				TimeChooserDialog mDialog = new TimeChooserDialog(context);
+				mDialog = new TimeChooserDialog(context);
 				mDialog.show();
 			}
 		});
