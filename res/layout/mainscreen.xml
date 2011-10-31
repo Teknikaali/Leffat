@@ -44,6 +44,14 @@
         	android:layout_marginRight="12dip"
        		android:layout_marginTop="10dip">
         </ImageButton>
+        <ImageButton
+            android:id="@+id/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/filter_button"
+            android:background="@null"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="3dip" />
     </TableRow>
 	<ExpandableListView
 		android:layout_height="wrap_content"
