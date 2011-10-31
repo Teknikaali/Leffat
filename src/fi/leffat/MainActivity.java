@@ -88,10 +88,6 @@ public class MainActivity extends Activity
     private MovieListAdapter adapter;
     
     private ExpandableListView movieExpendableList;
-    
-    public int areacodeSelectionPosition;
-    
-    private Dialog configDialog;
 
 	/* ============================================
 	 *  Inherited methods
@@ -137,10 +133,15 @@ public class MainActivity extends Activity
         	parser = new XmlParser();
         }
         
-        // Check areacode
-        SharedPreferences leffaPrefs = context.getSharedPreferences("leffaPrefs", MODE_WORLD_READABLE);
+        /**
+         * Preference-editor
+         */
+        SharedPreferences leffaPrefs = context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
         final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
         
+        /**
+         * First startup of the program sets AREA_CODE to Capital Region
+         */
         if (leffaPrefs.getString("AREA_CODE", null) == null) {
             prefsEditor.putString("AREA_CODE", "1014");
 	        prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
@@ -148,107 +149,16 @@ public class MainActivity extends Activity
         }
         
         /**
-         * Configuration dialog
-         */
-        // Set up the base dialog
-    	configDialog = new Dialog(MainActivity.this);
-    	configDialog.setContentView(R.layout.configdialog);
-    	configDialog.setTitle(R.string.settings_title);
-    	configDialog.setCancelable(false);
-    	
-    	// Set up a spinner selector for areacodes
-    	Spinner areacodeSpinner = (Spinner) configDialog.findViewById(R.id.areacodeSpinner);
-    	ArrayAdapter<CharSequence> areaAdapter = ArrayAdapter.createFromResource(MainActivity.this,
-    																		 R.array.areacode_array,
-    																		 android.R.layout.simple_spinner_item);
-    	areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    	areacodeSpinner.setAdapter(areaAdapter);
-    	areacodeSpinner.setOnItemSelectedListener(new OnAreaCodeSelectedListener());
-    	
-    	// Check if a selection has been done already
-    	if (leffaPrefs.getString("AREA_CODE", null) != null)
-    	{
-    		areacodeSpinner.setSelection(areacodeSelectionPosition);
-    	}
-
-    	// Set up Accept-button
-    	Button acceptButton = (Button)configDialog.findViewById(R.id.accept);
-    	acceptButton.setOnClickListener(new OnClickListener() {
-    		public void onClick(View v) {
-    			
-    			// Reformat selected spinner text to an areacode
-    			while (!areacode.matches("\\d+"))
-    			{
-    				if (areacode.equals("P‰‰kaupunkiseutu")) {
-    					areacode = "1014";
-    				}
-    				else if (areacode.equals("Espoo")) {
-    					areacode = "1012";
-    				}
-    				else if (areacode.equals("Helsinki")) {
-    					areacode = "1002";
-    				}
-    				else if (areacode.equals("Helsinki :: Kinopalatsi")) {
-    					areacode = "1031";
-    				}
-    				else if (areacode.equals("Helsinki :: Maxim")) {
-    					areacode = "1012";
-    				}
-    				else if (areacode.equals("Jyv‰skyl‰")) {
-    					areacode = "1015";
-    				}
-    				else if (areacode.equals("Kuopio")) {
-    					areacode = "1016";
-    				}
-    				else if (areacode.equals("Lahti")) {
-    					areacode = "1017";
-    				}
-    				else if (areacode.equals("Oulu")) {
-    					areacode = "1018";
-    				}
-    				else if (areacode.equals("Pori")) {
-    					areacode = "1019";
-    				}
-    				else if (areacode.equals("Rovaniemi")) {
-    					areacode = "1020";
-    				}
-    				else if (areacode.equals("Tampere")) {
-    					areacode = "1021";
-    				}
-    				else if (areacode.equals("Tampere :: Cine Atlas")) {
-    					areacode = "1034";
-    				}
-    				else if (areacode.equals("Tampere :: Plevna")) {
-    					areacode = "1035";
-    				}
-    				else if (areacode.equals("Turku")) {
-    					areacode = "1022";
-    				}
-    				else if (areacode.equals("Vantaa")) {
-    					areacode = "1013";
-    				}
-    			}
-    			
-    			// Save the settings
-                prefsEditor.putString("AREA_CODE", areacode);
-    	        prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
-                prefsEditor.commit();
-
-    			//Toast.makeText(context, "The area code is " + areacode, Toast.LENGTH_LONG).show();
-                
-    			configDialog.dismiss();
-    			configDialog.hide();
-    		}
-    	});
-    	
-    	// Set up Cancel-button
-    	Button cancelButton = (Button)configDialog.findViewById(R.id.cancel);
-    	cancelButton.setOnClickListener(new OnClickListener() {
-    		public void onClick(View v) {
-    			configDialog.dismiss();
-    			configDialog.hide();
-    		}
-    	});
+         * If the AREA_CODE has been changed from Preferences, load the movie
+         * list again and reset AREA_CODE_CHANGED to FALSE
+         */ 
+        else if (leffaPrefs.getBoolean("AREA_CODE_CHANGED", true) == true ) {
+    		Intent intent = new Intent(context, LoadActivity.class);
+    		startActivityForResult(intent, 0);
+    		
+        	prefsEditor.putBoolean("AREA_CODE_CHANGED", false);
+        }
+		
 		
 		// Create listener for refresh-button
 		ImageButton refresh = (ImageButton) findViewById(R.id.refresh_button);
@@ -265,11 +175,12 @@ public class MainActivity extends Activity
 		config.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-            	configDialog.show();
+				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				startActivity(settingsActivity);
 			}
 		});
 		
-		// Create listener for config-button
+		// Create listener for search-button
 		ImageButton search = (ImageButton) findViewById(R.id.search_button);
 		search.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
@@ -315,7 +226,8 @@ public class MainActivity extends Activity
 				movieExpendableList.requestLayout();
 			}
 			else if (resultCode == 0) {
-				configDialog.show();
+				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				startActivity(settingsActivity);
 			}
 		}
 		// User came back from SearchActivity
@@ -325,24 +237,13 @@ public class MainActivity extends Activity
 				// TODO Show info screen
 			}
 		}
-	}
-    
-    /**
-     * Listener for a spinner...
-     */
-    public class OnAreaCodeSelectedListener implements OnItemSelectedListener
-	{
-		public void onItemSelected(AdapterView<?> parent,
-				View view, int pos, long id) {
-			
-			// Save the selection to a variable
-			areacode = parent.getItemAtPosition(pos).toString();
-			areacodeSelectionPosition = pos;
-		}
-		
-		@SuppressWarnings("rawtypes")
-		public void onNothingSelected(AdapterView parent) {
-			// Do nothing ...
+		// User came back from Preferences
+		else {
+			groups.clear();
+			childs.clear();
+			generateView();
+			movieExpendableList.invalidateViews();
+			movieExpendableList.requestLayout();
 		}
 	}
     
@@ -374,6 +275,7 @@ public class MainActivity extends Activity
      */
     private void generateView()
     {
+    	Log.d("TESTI", "generateView()");
     	// Get a list of movies
 		ArrayList<ArrayList<Movie>> movies = parser.getList();
         
