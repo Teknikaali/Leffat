@@ -3,66 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
+
+
+
+
+
+
+
+
+
+
+
     <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:baselineAligned="true" >
-
+        android:baselineAligned="true"
+        android:paddingLeft="10px"
+        android:paddingRight="10px" >
+
+
+
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView" />
-
-        <TimePicker
-            android:id="@+id/timePicker"
+            android:text="@string/set_time"
+            android:textColor="#ffcb05"
+            android:textSize="25px" />
+
+        <Spinner
+            android:id="@+id/spinner3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content" />
 
     </TableRow>
-
+
+
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3px" >
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px" >
+
+
+
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_gravity="center_vertical"
+            android:text="@string/set_rating"
+            android:textColor="#ffcb05"
+            android:textSize="25px" />
 
-        <EditText
-            android:id="@+id/editText1"
+
+        <Spinner
+            android:id="@+id/spinner1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <requestFocus />
-        </EditText>
+            android:layout_height="wrap_content" />
 
     </TableRow>
-
+
+
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3px" >
-
+        android:layout_marginTop="3px"        
+        android:paddingLeft="10px"
+        android:paddingRight="10px" >
+
+
+
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView" />
+            android:text="@string/set_genre"
+            android:textColor="#ffcb05"
+            android:textSize="25px" />
+
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinner2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

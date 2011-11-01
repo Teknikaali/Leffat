@@ -32,4 +32,41 @@
     
     <string name="year">Production year: </string>
     <string name="genre">Genre: </string>
+    <string name="set_time">"Time: "</string>
+    <string name="set_rating">"Rating: "</string>
+    <string name="set_genre">"Genre: "</string>
+    
+    <string name="rating_prompt">Choose rating</string>
+    <string-array name="rating_array">
+        <item>S</item>
+        <item>K-7</item>
+        <item>K-11</item>
+        <item>K-15</item>
+        <item>K-18</item>
+    </string-array>
+    
+    <string name="genre_prompt">Choose a genre</string>
+    <string-array name="genre_array">
+        <item>Kokkelis</item>
+        <item>Proni</item>
+        <item>Steven Seagal</item>
+        <item>Conan O\'Brien</item>
+        <item>MArio</item>
+    </string-array>
+    
+    <string name="time_prompt">Choose a time</string>
+    <string-array name="time_array">
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
+    </string-array>
 </resources>
