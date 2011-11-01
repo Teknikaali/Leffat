@@ -14,7 +14,7 @@
         	android:id="@+id/imageView1"
         	android:src="@drawable/logo"
         	android:layout_height="wrap_content"
-        	android:layout_marginRight="30dip"
+        	android:layout_marginRight="10dip"
         	android:layout_marginTop="5dip">
         </ImageView>
         <ImageButton 
@@ -23,7 +23,7 @@
         	android:layout_width="wrap_content"
         	android:id="@+id/refresh_button"
         	android:background="@null"
-        	android:layout_marginRight="12dip"
+        	android:layout_marginRight="5dip"
         	android:layout_marginTop="10dip">
         </ImageButton>
         <ImageButton 
@@ -32,7 +32,7 @@
         	android:layout_width="wrap_content" 
         	android:id="@+id/config_button"
         	android:background="@null"
-        	android:layout_marginRight="12dip"
+        	android:layout_marginRight="5dip"
        		android:layout_marginTop="10dip">
         </ImageButton>
         <ImageButton 
@@ -41,7 +41,7 @@
         	android:layout_width="wrap_content" 
         	android:id="@+id/search_button"
         	android:background="@null"
-        	android:layout_marginRight="12dip"
+        	android:layout_marginRight="5dip"
        		android:layout_marginTop="10dip">
         </ImageButton>
         <ImageButton
@@ -50,8 +50,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/filter_button"
             android:background="@null"
-            android:layout_marginTop="10dip"
-            android:layout_marginLeft="3dip" />
+            android:layout_marginTop="10dip" />
     </TableRow>
 	<ExpandableListView
 		android:layout_height="wrap_content"
