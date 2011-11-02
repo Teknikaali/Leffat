@@ -88,6 +88,8 @@ public class MainActivity extends Activity
     private MovieListAdapter adapter;
     
     private ExpandableListView movieExpendableList;
+    
+    private TimeChooserDialog mDialog;
 
 	/* ============================================
 	 *  Inherited methods
@@ -190,6 +192,16 @@ public class MainActivity extends Activity
 			}
 		});
         
+		ImageButton filter = (ImageButton) findViewById(R.id.filter_button);
+		filter.setOnClickListener(new OnClickListener() {
+			public void onClick(View v)
+			{
+				//TODO: tee dialogi ajan muuttamiselle valmiiksi
+				mDialog = new TimeChooserDialog(context);
+				mDialog.show();
+			}
+		});
+		
         if (!isDone) {
         	Intent intent = new Intent(this, LoadActivity.class);
         	startActivityForResult(intent, 1);
