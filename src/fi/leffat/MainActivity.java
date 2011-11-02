@@ -337,16 +337,23 @@ public class MainActivity extends Activity
     	// Initialize children
     	dayCount = 0;
     	
+    	Filterer f = new Filterer(context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE));
+    	
     	while (dayCount < 7) {
         	
 	        childs.add(new ArrayList<ArrayList<String>>());
-	        
-	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
-	        	childs.get(dayCount).add(new ArrayList<String>());
-		        
-	        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
 	        	
-	        	childs.get(dayCount).get(index).add(text);
+	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
+	        	
+	        	// Check filters and show movies
+	        	if (!f.isFiltered(movies.get(dayCount).get(index))) {
+		        	childs.get(dayCount).add(new ArrayList<String>());
+			        
+		        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
+		        	
+		        	childs.get(dayCount).get(index).add(text);
+	        	}
+	        	
 	        }
 	        
 	        dayCount++;
