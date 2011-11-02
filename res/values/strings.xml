@@ -32,6 +32,12 @@
     
     <string name="year">Production year: </string>
     <string name="genre">Genre: </string>
+    
+    <!-- Preferences -->
+    <string name="pref_category1">General</string>
+    <string name="pref_category2">Filter settings</string>
+    <string name="areacode_selection">Area selection</string>
+    
     <string name="set_time">"Time: "</string>
     <string name="set_rating">"Rating: "</string>
     <string name="set_genre">"Genre: "</string>
@@ -53,7 +59,6 @@
         <item>Conan O\'Brien</item>
         <item>MArio</item>
     </string-array>
-    
         
     <string name="time_prompt">Choose a time</string>
     <string-array name="time_array">
@@ -70,4 +75,5 @@
         <item>22:00</item>
         <item>23:00</item>
     </string-array>
+    
 </resources>
