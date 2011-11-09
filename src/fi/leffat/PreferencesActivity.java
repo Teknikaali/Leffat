@@ -16,7 +16,7 @@ import android.preference.PreferenceManager;
  * @author Teknikaali
  *
  */
-public class Preferences extends PreferenceActivity implements OnSharedPreferenceChangeListener
+public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener
 {
 	/**
 	 * Listener for OnSharedPreferenceChangeListener()
@@ -25,13 +25,18 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 	    	  
 		    // Check if AREA_CODE has been changed and commit the changes to the SharedPreferences-file
-		    if (key.equals("AREA_CODE"))
-		    {
+		    if (key.equals("AREA_CODE")) {
 				SharedPreferences leffaPrefs = getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
 				final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
 				prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
 				prefsEditor.commit();
 			}
+		    else if (key.equals("FILTER_ACTIVE_SHOWN_SHOWS")) {
+		    	SharedPreferences leffaPrefs = getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
+				final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
+				prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
+				prefsEditor.commit();
+		    }
 		    // Update the view with changed information
 		    updatePrefSummary(findPreference(key));
 	    }
@@ -41,7 +46,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
         super.onCreate(savedInstanceState);
         
         addPreferencesFromResource(R.xml.preferences);
-        PreferenceManager.setDefaultValues(Preferences.this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(PreferencesActivity.this, R.xml.preferences, false);
 
         for(int i=0;i<getPreferenceScreen().getPreferenceCount();i++){
         	initSummary(getPreferenceScreen().getPreference(i));

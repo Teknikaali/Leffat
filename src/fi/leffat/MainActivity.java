@@ -177,7 +177,7 @@ public class MainActivity extends Activity
 		config.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				Intent settingsActivity = new Intent(getBaseContext(),PreferencesActivity.class);
 				startActivity(settingsActivity);
 			}
 		});
@@ -228,7 +228,7 @@ public class MainActivity extends Activity
 				movieExpendableList.requestLayout();
 			}
 			else if (resultCode == 0) {
-				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				Intent settingsActivity = new Intent(getBaseContext(),PreferencesActivity.class);
 				startActivity(settingsActivity);
 			}
 		}
@@ -342,8 +342,15 @@ public class MainActivity extends Activity
     	while (dayCount < 7) {
         	
 	        childs.add(new ArrayList<ArrayList<String>>());
-	        	
+	        
+	        /**
+	         * Index in arraylist where to add the movie
+	         */
+	        int fixedIndex = 0;
+	        
 	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
+	        	Log.d("TESTI", "isFiltered = " + f.isFiltered(movies.get(dayCount).get(index))
+	        			+ " dayCount = " + dayCount + " index = " + index + " fixedIndex = " + fixedIndex);
 	        	
 	        	// Check filters and show movies
 	        	if (!f.isFiltered(movies.get(dayCount).get(index))) {
@@ -351,7 +358,11 @@ public class MainActivity extends Activity
 			        
 		        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
 		        	
-		        	childs.get(dayCount).get(index).add(text);
+		        	childs.get(dayCount).get(fixedIndex).add(text);
+		        	fixedIndex++;
+	        	}
+	        	else {
+	        		Log.d("TESTI", "Leffa ei mennyt listaan");
 	        	}
 	        	
 	        }
