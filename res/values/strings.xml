@@ -33,10 +33,12 @@
     <string name="year">Production year: </string>
     <string name="genre">Genre: </string>
     
-    <!-- Preferences -->
+    <!-- Preferences START -->
     <string name="pref_category1">General</string>
     <string name="pref_category2">Filter settings</string>
     <string name="areacode_selection">Area selection</string>
+    <string name="hide_shown_shows">Hide already shown movies</string>
+    <!-- Preferences END -->
     
     <string name="set_time">"Time: "</string>
     <string name="set_rating">"Rating: "</string>

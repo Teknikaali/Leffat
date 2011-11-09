@@ -2,15 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
         <PreferenceCategory
                 android:title="@string/pref_category1">
-                
-                <!-- 
-                <CheckBoxPreference
-                        android:title="Checkbox Preference"
-                        android:defaultValue="false"
-                        android:summary="This preference can be true or false"
-                        android:key="checkboxPref" />
-                -->
-                
+
                 <ListPreference
                         android:title="@string/areacode_selection"
                         android:summary="This preference allows to select an item in an array"
@@ -22,6 +14,11 @@
         <PreferenceCategory
                 android:title="@string/pref_category2">
                 
+                <CheckBoxPreference
+                        android:title="@string/hide_shown_shows"
+                        android:defaultValue="false"
+                        android:summary="This preference can be true or false"
+                        android:key="FILTER_ACTIVE_SHOWN_SHOWS" />
                 <!--
                 
         <EditTextPreference
