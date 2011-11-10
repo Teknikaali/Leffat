@@ -9,54 +9,76 @@
     	android:layout_gravity="left|center_vertical"
     	android:layout_height="56dip"
         android:layout_marginLeft="10dip">
-        <ImageView
-        	android:layout_width="wrap_content"
-        	android:id="@+id/imageView1"
-        	android:src="@drawable/logo"
-        	android:layout_height="wrap_content"
-        	android:layout_marginRight="30dip"
-        	android:layout_marginTop="5dip">
-        </ImageView>
-        <ImageButton 
-        	android:src="@drawable/refresh_button" 
-        	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content"
-        	android:id="@+id/refresh_button"
-        	android:background="@null"
-        	android:layout_marginRight="12dip"
-        	android:layout_marginTop="10dip">
-        </ImageButton>
-        <ImageButton 
-        	android:src="@drawable/config_button" 
-        	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-        	android:id="@+id/config_button"
-        	android:background="@null"
-        	android:layout_marginRight="12dip"
-       		android:layout_marginTop="10dip">
-        </ImageButton>
-        <ImageButton 
-        	android:src="@drawable/search_button" 
-        	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-        	android:id="@+id/search_button"
-        	android:background="@null"
-        	android:layout_marginRight="12dip"
-       		android:layout_marginTop="10dip">
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/filter_button"
-            android:background="@null"
-            android:layout_marginTop="10dip"
-            android:layout_marginLeft="3dip" />
+        
+    	<LinearLayout android:id="@+id/linearLayout1"
+    		android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content"
+        	android:gravity="left">
+    		
+    		<ImageView
+        		android:id="@+id/imageView1"
+        		android:src="@drawable/logo_icon"
+        		android:layout_width="match_parent"
+        		android:layout_height="match_parent"
+	        	android:layout_marginTop="3dip">
+        	</ImageView>
+    		
+    	</LinearLayout>
+        
+    	<LinearLayout android:id="@+id/linearLayout1"
+    		android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content"
+        	android:gravity="right">
+    		
+    		<ImageButton 
+	        	android:src="@drawable/refresh_button" 
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="wrap_content"
+	        	android:id="@+id/refresh_button"
+	        	android:background="@null"
+	        	android:layout_marginTop="12dip">
+	        </ImageButton>
+	        <ImageButton 
+	        	android:src="@drawable/config_button" 
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="wrap_content" 
+	        	android:id="@+id/config_button"
+	        	android:background="@null"
+	        	android:layout_marginLeft="5dip"
+	       		android:layout_marginTop="12dip">
+	        </ImageButton>
+	        <ImageButton 
+	        	android:src="@drawable/search_button" 
+	        	android:layout_height="wrap_content" 
+	        	android:layout_width="wrap_content" 
+	        	android:id="@+id/search_button"
+	        	android:background="@null"
+	        	android:layout_marginLeft="5dip"
+	       		android:layout_marginTop="12dip">
+	        </ImageButton>
+	        <ImageButton
+	            android:id="@+id/filter_button"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/filter_button"
+	            android:background="@null"
+	        	android:layout_marginLeft="5dip"
+	        	android:layout_marginRight="5dip"
+	            android:layout_marginTop="12dip">
+	        </ImageButton>
+    		
+    	</LinearLayout>
     </TableRow>
+    <EditText
+    	android:id="@+id/searchbar"
+    	android:text="Search bar"
+    	android:layout_height="wrap_content"
+    	android:layout_width="match_parent">
+    </EditText>
 	<ExpandableListView
+		android:id="@+id/ExpandableListView_leffalista"
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:id="@+id/ExpandableListView_leffalista"
 		android:background="@android:color/transparent"
 		android:cacheColorHint="@android:color/transparent">
 	</ExpandableListView>

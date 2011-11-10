@@ -3,7 +3,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="280dip"
-  android:layout_height="82dip">
+  android:layout_height="82dip"
+	android:background="#ffffff">
 	<ProgressBar android:id="@+id/progressBar1"
 		style="?android:attr/progressBarStyleHorizontal"
 		android:minHeight="40dip"
@@ -13,15 +14,14 @@
 		android:layout_gravity="center_horizontal"
 		android:layout_height="wrap_content">
 	</ProgressBar>
-	<TextView android:textColor="#ffcb05"
+	<TextView
 		android:layout_width="wrap_content"
-		android:textSize="16dip"
 		android:text="@string/loadingText_0"
-		android:textStyle="bold"
 		android:layout_marginTop="54dip"
 		android:id="@+id/loadingText"
 		android:layout_gravity="center_horizontal"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+        android:textAppearance="@style/load_text">
 	</TextView>
 	
 </FrameLayout>

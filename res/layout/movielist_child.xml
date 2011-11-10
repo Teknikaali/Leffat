@@ -11,9 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30px"
-        android:textColor="#ffcb05"
-        android:textSize="23px"
-    >
+		android:textAppearance="@style/list_group">
     </TextView>
  
     <TextView
@@ -21,9 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
-        android:textColor="#ffcb05"
-        android:textSize="23px"
-    >
+		android:textAppearance="@style/list_group">
     </TextView>
  
     <TextView
@@ -31,9 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
-        android:textColor="#ffcb05"
-        android:textSize="23px"
-    >
+		android:textAppearance="@style/list_group">
     </TextView>
  
 </LinearLayout>

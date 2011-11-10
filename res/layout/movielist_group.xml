@@ -12,9 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50px"
         android:gravity="center_vertical"
-        android:textColor="#ffcb05"
-        android:textSize="28px"
-    >
+		android:textAppearance="@style/list_group">
     </TextView>
  
 </LinearLayout>

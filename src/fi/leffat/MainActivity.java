@@ -37,6 +37,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,6 +89,12 @@ public class MainActivity extends Activity
     private MovieListAdapter adapter;
     
     private ExpandableListView movieExpendableList;
+    
+    private TimeChooserDialog mDialog;
+    
+    private SharedPreferences leffaPrefs;
+    
+    private SharedPreferences.Editor prefsEditor;
 
 	/* ============================================
 	 *  Inherited methods
@@ -98,8 +105,6 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
         
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
-    	
-    	isDone = false;
 
         setContentView(R.layout.mainscreen);
 
@@ -112,8 +117,6 @@ public class MainActivity extends Activity
 		
 		movieExpendableList.setAdapter(adapter);
     }
-    
-    private static boolean isDone;
     
     /**
      * Checks all data and reloads them if necessary.<br><br>
@@ -133,30 +136,24 @@ public class MainActivity extends Activity
         	parser = new XmlParser();
         }
         
-        /**
-         * Preference-editor
-         */
-        SharedPreferences leffaPrefs = context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
-        final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
+        // Load preferences editor
+        leffaPrefs = context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
+        prefsEditor = leffaPrefs.edit();
         
-        /**
-         * First startup of the program sets AREA_CODE to Capital Region
-         */
+        // First startup of the program sets AREA_CODE to Capital Region
         if (leffaPrefs.getString("AREA_CODE", null) == null) {
             prefsEditor.putString("AREA_CODE", "1014");
 	        prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
             prefsEditor.commit();
         }
-        
-        /**
-         * If the AREA_CODE has been changed from Preferences, load the movie
-         * list again and reset AREA_CODE_CHANGED to FALSE
-         */ 
-        else if (leffaPrefs.getBoolean("AREA_CODE_CHANGED", true) == true ) {
-    		Intent intent = new Intent(context, LoadActivity.class);
-    		startActivityForResult(intent, 0);
+        // If the AREA_CODE has been changed from Preferences, load the movie
+        // list again and reset AREA_CODE_CHANGED to FALSE
+        else if (leffaPrefs.getBoolean("AREA_CODE_CHANGED", true)) {
+    		//Intent intent = new Intent(context, LoadActivity.class);
+    		//startActivityForResult(intent, 0);
     		
         	prefsEditor.putBoolean("AREA_CODE_CHANGED", false);
+            prefsEditor.commit();
         }
 		
 		
@@ -165,8 +162,8 @@ public class MainActivity extends Activity
 		refresh.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-        		Intent intent = new Intent(context, LoadActivity.class);
-        		startActivityForResult(intent, 1);
+        		//Intent intent = new Intent(context, LoadActivity.class);
+        		//startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -185,8 +182,7 @@ public class MainActivity extends Activity
 		search.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-        		Intent intent = new Intent(context, SearchActivity.class);
-        		startActivityForResult(intent, 2);
+        		// TODO
 			}
 		});
         
@@ -195,16 +191,17 @@ public class MainActivity extends Activity
 			public void onClick(View v)
 			{
 				//TODO: tee dialogi ajan muuttamiselle valmiiksi
-				TimeChooserDialog mDialog = new TimeChooserDialog(context);
+				mDialog = new TimeChooserDialog(context);
 				mDialog.show();
 			}
 		});
 		
-        if (!isDone) {
+		boolean i = isUpdateNeeded();
+		Log.e("TESTI", "i == " + i);
+		if (i == true) {
         	Intent intent = new Intent(this, LoadActivity.class);
         	startActivityForResult(intent, 1);
-        	isDone = true;
-        }
+		}
     }
 	
 	/**
@@ -226,7 +223,7 @@ public class MainActivity extends Activity
 				movieExpendableList.requestLayout();
 			}
 			else if (resultCode == 0) {
-				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				Intent settingsActivity = new Intent(getBaseContext(), Preferences.class);
 				startActivity(settingsActivity);
 			}
 		}
@@ -335,19 +332,83 @@ public class MainActivity extends Activity
     	// Initialize children
     	dayCount = 0;
     	
+    	//Filterer f = new Filterer(context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE));
+    	
     	while (dayCount < 7) {
         	
 	        childs.add(new ArrayList<ArrayList<String>>());
-	        
-	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
-	        	childs.get(dayCount).add(new ArrayList<String>());
-		        
-	        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
 	        	
-	        	childs.get(dayCount).get(index).add(text);
+	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
+	        	
+	        	// Check filters and show movies
+	        	//if (!f.isFiltered(movies.get(dayCount).get(index))) {
+		        	childs.get(dayCount).add(new ArrayList<String>());
+			        
+		        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
+		        	
+		        	childs.get(dayCount).get(index).add(text);
+	        	//}
+	        	
 	        }
 	        
 	        dayCount++;
     	}
+    }
+    
+    /**
+     * Checks if an update of the movie data is needed.<br><br>
+     * 
+     * If this is the first time this application is started, update is always done.
+     * After that it will be done automatically once a day.<br><br>
+     * 
+     * Note! This method also updates DATA_LOADED and LAST_LOAD_DATE values
+     * in preferences!
+     * 
+     * @return TRUE if update is needed, FALSE if it's not
+     */
+    private final boolean isUpdateNeeded()
+    {
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+    	Date currentDate = new Date();
+    	
+    	if (!leffaPrefs.getBoolean("DATA_LOADED", false)) {
+    		Log.e("TESTI", "Data not loaded, TRUE");
+			prefsEditor.putBoolean("DATA_LOADED", true);
+			prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
+			prefsEditor.commit();
+    		return true;
+        }
+        else {
+    		Log.e("TESTI", "Data loaded...");
+			
+        	try {
+				Date lastLoadDate = sdf.parse(leffaPrefs.getString("LAST_LOAD_DATE", null));
+				
+				int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
+				
+				if (lastLoadDate.getTime() + MILLIS_IN_DAY < currentDate.getTime()) {
+		    		Log.e("TESTI", "Data is old, TRUE");
+					prefsEditor.putBoolean("DATA_LOADED", true);
+					prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
+					prefsEditor.commit();
+					
+					return true;
+				}
+			}
+        	catch (ParseException e) {
+				e.printStackTrace();
+				
+	    		Log.e("TESTI", "Had problems, TRUE");
+				
+				prefsEditor.putBoolean("DATA_LOADED", true);
+				prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
+				prefsEditor.commit();
+				
+				return true;
+			}
+        }
+
+		Log.e("TESTI", "Data is new, FALSE");
+    	return false;
     }
 }

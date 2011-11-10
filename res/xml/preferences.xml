@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
         <PreferenceCategory
-                android:title="General">
+                android:title="@string/pref_category1">
                 
                 <!-- 
                 <CheckBoxPreference
@@ -12,15 +12,15 @@
                 -->
                 
                 <ListPreference
-                        android:title="Area selection"
-                        android:summary="This preference allows to select an item in a array"
+                        android:title="@string/areacode_selection"
+                        android:summary="This preference allows to select an item in an array"
                         android:key="AREA_CODE"
                         android:defaultValue="1014"
                         android:entries="@array/listArray"
                         android:entryValues="@array/listValues" />
         </PreferenceCategory>
         <PreferenceCategory
-                android:title="Filters">
+                android:title="@string/pref_category2">
                 
                 <!--
                 
