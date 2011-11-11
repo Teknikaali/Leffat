@@ -68,6 +68,7 @@
 	        </ImageButton>
     		
     	</LinearLayout>
+    	
     </TableRow>
     <EditText
     	android:id="@+id/searchbar"

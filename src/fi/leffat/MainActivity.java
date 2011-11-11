@@ -149,11 +149,13 @@ public class MainActivity extends Activity
         // If the AREA_CODE has been changed from Preferences, load the movie
         // list again and reset AREA_CODE_CHANGED to FALSE
         else if (leffaPrefs.getBoolean("AREA_CODE_CHANGED", true)) {
-    		//Intent intent = new Intent(context, LoadActivity.class);
-    		//startActivityForResult(intent, 0);
+    		Intent intent = new Intent(context, LoadActivity.class);
+    		startActivityForResult(intent, 0);
     		
         	prefsEditor.putBoolean("AREA_CODE_CHANGED", false);
             prefsEditor.commit();
+            
+            setDataAsLoaded();
         }
 		
 		
@@ -162,8 +164,8 @@ public class MainActivity extends Activity
 		refresh.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-        		//Intent intent = new Intent(context, LoadActivity.class);
-        		//startActivityForResult(intent, 1);
+        		Intent intent = new Intent(context, LoadActivity.class);
+        		startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -172,7 +174,7 @@ public class MainActivity extends Activity
 		config.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-				Intent settingsActivity = new Intent(getBaseContext(),Preferences.class);
+				Intent settingsActivity = new Intent(getBaseContext(),PreferencesActivity.class);
 				startActivity(settingsActivity);
 			}
 		});
@@ -196,11 +198,12 @@ public class MainActivity extends Activity
 			}
 		});
 		
-		boolean i = isUpdateNeeded();
-		Log.e("TESTI", "i == " + i);
-		if (i == true) {
+		if (isUpdateNeeded()) {
         	Intent intent = new Intent(this, LoadActivity.class);
         	startActivityForResult(intent, 1);
+		}
+		else {
+			refreshList();
 		}
     }
 	
@@ -214,16 +217,10 @@ public class MainActivity extends Activity
 		// User came back from LoadActivity
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK || resultCode == -2) {
-				groups.clear();
-				childs.clear();
-				
-				generateView();
-				
-				movieExpendableList.invalidateViews();
-				movieExpendableList.requestLayout();
+				refreshList();
 			}
 			else if (resultCode == 0) {
-				Intent settingsActivity = new Intent(getBaseContext(), Preferences.class);
+				Intent settingsActivity = new Intent(getBaseContext(),PreferencesActivity.class);
 				startActivity(settingsActivity);
 			}
 		}
@@ -236,11 +233,7 @@ public class MainActivity extends Activity
 		}
 		// User came back from Preferences
 		else {
-			groups.clear();
-			childs.clear();
-			generateView();
-			movieExpendableList.invalidateViews();
-			movieExpendableList.requestLayout();
+			refreshList();
 		}
 	}
     
@@ -272,7 +265,6 @@ public class MainActivity extends Activity
      */
     private void generateView()
     {
-    	Log.d("TESTI", "generateView()");
     	// Get a list of movies
 		ArrayList<ArrayList<Movie>> movies = parser.getList();
         
@@ -332,22 +324,33 @@ public class MainActivity extends Activity
     	// Initialize children
     	dayCount = 0;
     	
-    	//Filterer f = new Filterer(context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE));
+    	Filterer f = new Filterer(context.getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE));
     	
     	while (dayCount < 7) {
         	
 	        childs.add(new ArrayList<ArrayList<String>>());
-	        	
+	        
+	        /**
+	         * Index in arraylist where to add the movie
+	         */
+	        int fixedIndex = 0;
+	        
 	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
+	        	Log.d("TESTI", "isFiltered = " + f.isFiltered(movies.get(dayCount).get(index))
+	        			+ " dayCount = " + dayCount + " index = " + index + " fixedIndex = " + fixedIndex);
 	        	
 	        	// Check filters and show movies
-	        	//if (!f.isFiltered(movies.get(dayCount).get(index))) {
+	        	if (!f.isFiltered(movies.get(dayCount).get(index))) {
 		        	childs.get(dayCount).add(new ArrayList<String>());
 			        
 		        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
 		        	
-		        	childs.get(dayCount).get(index).add(text);
-	        	//}
+		        	childs.get(dayCount).get(fixedIndex).add(text);
+		        	fixedIndex++;
+	        	}
+	        	else {
+	        		Log.d("TESTI", "Leffa ei mennyt listaan");
+	        	}
 	        	
 	        }
 	        
@@ -368,29 +371,22 @@ public class MainActivity extends Activity
      */
     private final boolean isUpdateNeeded()
     {
-    	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-    	Date currentDate = new Date();
-    	
     	if (!leffaPrefs.getBoolean("DATA_LOADED", false)) {
-    		Log.e("TESTI", "Data not loaded, TRUE");
-			prefsEditor.putBoolean("DATA_LOADED", true);
-			prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
-			prefsEditor.commit();
+    		setDataAsLoaded();
     		return true;
         }
         else {
-    		Log.e("TESTI", "Data loaded...");
 			
         	try {
+            	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 				Date lastLoadDate = sdf.parse(leffaPrefs.getString("LAST_LOAD_DATE", null));
 				
 				int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 				
+		    	Date currentDate = new Date();
+				
 				if (lastLoadDate.getTime() + MILLIS_IN_DAY < currentDate.getTime()) {
-		    		Log.e("TESTI", "Data is old, TRUE");
-					prefsEditor.putBoolean("DATA_LOADED", true);
-					prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
-					prefsEditor.commit();
+					setDataAsLoaded();
 					
 					return true;
 				}
@@ -398,17 +394,39 @@ public class MainActivity extends Activity
         	catch (ParseException e) {
 				e.printStackTrace();
 				
-	    		Log.e("TESTI", "Had problems, TRUE");
-				
-				prefsEditor.putBoolean("DATA_LOADED", true);
-				prefsEditor.putString("LAST_LOAD_DATE", sdf.format(currentDate));
-				prefsEditor.commit();
+				setDataAsLoaded();
 				
 				return true;
 			}
         }
-
-		Log.e("TESTI", "Data is new, FALSE");
+    	
     	return false;
+    }
+    
+    /**
+     * Marks the data as loaded by setting DATA_LOADED to true and LAST_LOAD_DATE to
+     * current date.
+     */
+    private final void setDataAsLoaded()
+    {
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+		prefsEditor.putBoolean("DATA_LOADED", true);
+		prefsEditor.putString("LAST_LOAD_DATE", sdf.format(new Date()));
+		prefsEditor.commit();
+    }
+    
+    /**
+     * Invalidates current list data, calls for generateView() and forces the new data
+     * it into the layout.
+     */
+    private final void refreshList()
+    {
+		groups.clear();
+		childs.clear();
+		
+		generateView();
+		
+		movieExpendableList.invalidateViews();
+		movieExpendableList.requestLayout();
     }
 }

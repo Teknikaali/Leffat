@@ -1,5 +1,7 @@
 package fi.leffat;
 
+import java.util.Calendar;
+
 import android.content.SharedPreferences;
 
 public class Filterer
@@ -32,9 +34,6 @@ public class Filterer
 	 */
 	public final boolean isFiltered(Movie movie)
 	{
-		
-		//TODO: Lisää filttereitä samaan tapaan kuin alla.
-		
 		// Check if production year filter is active
 		if (prefs.getBoolean("FILTER_ACTIVE_PRODUCTION_YEAR", false) == true ) {
 			int value = prefs.getInt("FILTER_VALUE_PRODUCTION_YEAR", 0);
@@ -42,7 +41,7 @@ public class Filterer
 			
 			// Filter is valid
 			if (value != 0) {
-				int ref = Integer.parseInt(movie.productionYear);
+				int ref = Integer.parseInt(movie.productionYear); // Reference where to compare
 				
 				// Check if filter matches the movie
 				if ((compare == GREATER_THAN && ref < value) || (compare == LESS_THAN && ref > value)) {
@@ -51,13 +50,81 @@ public class Filterer
 			}
 		}
 		
-		// TODO: Genre-filtteri
+		// Check if genre filter is active
+		if (prefs.getBoolean("FILTER_ACTIVE_GENRE", false) == true) {
+			String value = prefs.getString("FILTER_VALUE_GENRE", "NONE");
+			
+			// Filter is valid
+			if (value != "NONE") {
+				String ref = movie.getGenres(); // Reference where to compare
+				
+				// Check if filter matches the movie
+				if (ref.lastIndexOf(value) != -1) {
+					return true;
+				}
+			}
+		}
 		
-		// TODO: Ikäraja-filtteri
+		// Check if age filter is active
+		if (prefs.getBoolean("FILTER_ACTIVE_AGE", false) == true) {
+			String value = prefs.getString("FILTER_VALUE_AGE", "0");
+			
+			// Filter is valid
+			if (value != "0") {
+				String ref = movie.rating;
+				
+				// Check if filter matches the movie
+				if (ref.equals(value)) {
+					return true;
+				}
+			}
+		}
 		
-		// TODO: Aika-filtteri
+		// TODO: Leffan aloitus/lopetusajan filtteri ei ole logiikaltaan alkuunsakaan korrekti
+		// TODO: Filtterin pitäisi skipata tulevien päivien filtteröinti tämän filtterin kohdalla,
+		//		 jottei muiltakin päiviltä katoaisi saman kellonajan elokuvat
+		// TODO: String to int -muunnos ja sillee
+		// Check if starting/ending time-filter is active
+		if (prefs.getBoolean("FILTER_ACTIVE_TIME", false) == true) {
+			String value = prefs.getString("FILTER_VALUE_START_TIME", "-1");
+			
+			// Filter is valid
+			if (value != "-1") {
+				// TODO: Tämä uusiks
+				String ref = movie.showStartTimeH;
+				
+				// Check if filter matches the movie
+				if (ref.equals(value)) {
+					return true;
+				}
+			}
+		}
 		
-		// TODO: Nimi-filtteri
+		// Check if name-filter is active
+		if (prefs.getBoolean("FILTER_ACTIVE_NAME", false) == true) {
+			String value = prefs.getString("FILTER_VALUE_TIME", "0");
+			
+			// Filter is valid
+			if (value != "0") {
+				String ref = movie.title;
+				String ref2 = movie.originalTitle;
+				
+				// Check if filter matches the movie
+				if (ref.lastIndexOf(value) != -1 || ref2.lastIndexOf(value) != -1) {
+					return true;
+				}
+			}
+		}
+		
+		// Check if shown shows-filter is active
+		if (prefs.getBoolean("FILTER_ACTIVE_SHOWN_SHOWS", false) == true) {
+			int ref = Integer.parseInt(movie.showStartTimeH);
+			
+			// Check if filter matches the movie
+			if (ref < Calendar.HOUR_OF_DAY) {
+				return true;
+			}
+		}
 		
 		return false;
 	}
