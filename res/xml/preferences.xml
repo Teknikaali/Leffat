@@ -1,53 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-        <PreferenceCategory
-                android:title="@string/pref_category1">
+    <PreferenceCategory
+	     android:title="@string/pref_category1">
+	     
+	     <ListPreference
+	             android:title="@string/areacode_selection"
+	             android:summary="This preference allows to select an item in an array"
+	             android:key="AREA_CODE"
+	             android:defaultValue="1014"
+	             android:entries="@array/listArray"
+	             android:entryValues="@array/listValues" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_category2">
                 
-                <ListPreference
-                        android:title="@string/areacode_selection"
-                        android:summary="This preference allows to select an item in an array"
-                        android:key="AREA_CODE"
-                        android:defaultValue="1014"
-                        android:entries="@array/listArray"
-                        android:entryValues="@array/listValues" />
-        </PreferenceCategory>
-        <PreferenceCategory
-                android:title="@string/pref_category2">
-                
-                <CheckBoxPreference
-                        android:title="@string/hide_shown_shows"
-                        android:defaultValue="false"
-                        android:summary="This preference can be true or false"
-                        android:key="FILTER_ACTIVE_SHOWN_SHOWS" />
-                <!--
-                
+        <CheckBoxPreference
+            android:title="@string/hide_shown_shows"
+            android:defaultValue="false"
+            android:summary="This preference can be true or false"
+            android:key="FILTER_ACTIVE_ALREADY_SHOWN_MOVIES" />
+            
+        <ListPreference
+            android:title="@string/time_prompt"
+            android:summary="Movie start hour"
+            android:key="STARTHOUR_SELECTION"
+            android:defaultValue="0"
+            android:entries="@array/time_array"
+            android:entryValues="@array/timeValues"/>
+        
+        <ListPreference
+            android:title="@string/time_prompt"
+            android:summary="Movie end hour"
+            android:key="ENDHOUR_SELECTION"
+            android:defaultValue="0"
+            android:entries="@array/time_array"
+            android:entryValues="@array/timeValues"/>
+            
+            <ListPreference
+            android:title="@string/rating_prompt"
+            android:summary="Rating"
+            android:key="RATING_SELECTION"
+            android:defaultValue="0"
+            android:entries="@array/rating_array"
+            android:entryValues="@array/ratingValues"/>
+            
+            <ListPreference
+            android:title="@string/genre_prompt"
+            android:summary="Genre"
+            android:key="GENRE_SELECTION"
+            android:defaultValue="0"
+            android:entries="@array/genre_array"
+            android:entryValues="@array/genreValues"/>
+    </PreferenceCategory>
+        <!--    
         <EditTextPreference
-                android:name="EditText Preference"
-                android:summary="This allows you to enter a string"
-                android:defaultValue="Nothing"
-                android:title="Edit This Text"
-                android:key="editTextPref" />
+            android:name="EditText Preference"
+            android:summary="This allows you to enter a string"
+            android:defaultValue="Nothing"
+            android:title="Edit This Text"
+            android:key="editTextPref" />
+            
         <RingtonePreference
-                android:name="Ringtone Preference"
-                android:summary="Select a ringtone"
-                android:title="Ringtones"
-                android:key="ringtonePref" />
+            android:name="Ringtone Preference"
+            android:summary="Select a ringtone"
+            android:title="Ringtones"
+            android:key="ringtonePref" />
+            
         <PreferenceScreen
-                android:key="SecondPrefScreen"
-                android:title="Second PreferenceScreen"
-                android:summary="This is a second PreferenceScreen">
-                <EditTextPreference
-                        android:name="An other EditText Preference"
-                        android:summary="This is a preference in the second PreferenceScreen"
-                        android:title="Edit text"
-                        android:key="SecondEditTextPref" />
+            android:key="SecondPrefScreen"
+            android:title="Second PreferenceScreen"
+            android:summary="This is a second PreferenceScreen">
+            <EditTextPreference
+                    android:name="An other EditText Preference"
+                    android:summary="This is a preference in the second PreferenceScreen"
+                    android:title="Edit text"
+                    android:key="SecondEditTextPref" />
         </PreferenceScreen>
+        
+        
         <Preference
                 android:title="Custom Preference"
                 android:summary="This works almost like a button"
                 android:key="customPref" />
-                
-         -->
-         
-        </PreferenceCategory>
+	    </PreferenceCategory>
+	    -->
 </PreferenceScreen>

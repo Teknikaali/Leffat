@@ -11,7 +11,7 @@
 	    android:id="@+id/areacodeSpinner"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:prompt="@string/areacodes" />
+	    android:prompt="@array/listValues" />
 	    
 	<LinearLayout
 		android:id="@+id/linearLayout1"

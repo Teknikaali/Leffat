@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
@@ -95,6 +96,11 @@ public class MainActivity extends Activity
     private SharedPreferences leffaPrefs;
     
     private SharedPreferences.Editor prefsEditor;
+    
+    /**
+     * Search bar for searching purposes
+     */
+    private EditText searchBar;
 
 	/* ============================================
 	 *  Inherited methods
@@ -103,10 +109,12 @@ public class MainActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
+		Log.d("functions", "onCreate called");
         
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.mainscreen);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
         movieExpendableList = (ExpandableListView) findViewById(R.id.ExpandableListView_leffalista);
         movieExpendableList.setOnChildClickListener(new OnChildClick());
@@ -116,6 +124,8 @@ public class MainActivity extends Activity
 		adapter = new MovieListAdapter(this, groups, childs);
 		
 		movieExpendableList.setAdapter(adapter);
+		
+		searchBar = (EditText)findViewById(R.id.searchbar);
     }
     
     /**
@@ -128,6 +138,8 @@ public class MainActivity extends Activity
     public void onResume()
     {
         super.onResume();
+        
+		Log.d("functions", "onResume called");
         
         context = this;
         
@@ -184,11 +196,19 @@ public class MainActivity extends Activity
 		search.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
-        		// TODO
+				// Hides and reappears the searchBar
+				if (searchBar.isEnabled()) {
+					searchBar.setEnabled(false);
+					searchBar.setVisibility(View.GONE);
+				}
+				else {
+					searchBar.setEnabled(true);
+					searchBar.setVisibility(View.VISIBLE);
+				}
 			}
 		});
         
-		ImageButton filter = (ImageButton) findViewById(R.id.filter_button);
+		/*ImageButton filter = (ImageButton) findViewById(R.id.filter_button);
 		filter.setOnClickListener(new OnClickListener() {
 			public void onClick(View v)
 			{
@@ -196,7 +216,7 @@ public class MainActivity extends Activity
 				mDialog = new TimeChooserDialog(context);
 				mDialog.show();
 			}
-		});
+		});*/
 		
 		if (isUpdateNeeded()) {
         	Intent intent = new Intent(this, LoadActivity.class);
@@ -214,6 +234,8 @@ public class MainActivity extends Activity
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
+		Log.d("functions", "onActivityResult called");
+		
 		// User came back from LoadActivity
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK || resultCode == -2) {
@@ -265,6 +287,8 @@ public class MainActivity extends Activity
      */
     private void generateView()
     {
+		Log.d("functions", "generateView called");
+		
     	// Get a list of movies
 		ArrayList<ArrayList<Movie>> movies = parser.getList();
         
@@ -335,24 +359,29 @@ public class MainActivity extends Activity
 	         */
 	        int fixedIndex = 0;
 	        
-	        for (int index = 0; index < movies.get(dayCount).size(); index++) {
-	        	Log.d("TESTI", "isFiltered = " + f.isFiltered(movies.get(dayCount).get(index))
-	        			+ " dayCount = " + dayCount + " index = " + index + " fixedIndex = " + fixedIndex);
-	        	
-	        	// Check filters and show movies
-	        	if (!f.isFiltered(movies.get(dayCount).get(index))) {
-		        	childs.get(dayCount).add(new ArrayList<String>());
-			        
-		        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
+	        try {
+	        	for (int index = 0; index < movies.get(dayCount).size(); index++) {
+		        	/*Log.d("TESTI", "isFiltered = " + f.isFiltered(movies.get(dayCount).get(index))
+		        			+ " dayCount = " + dayCount + " index = " + index + " fixedIndex = " + fixedIndex);*/
 		        	
-		        	childs.get(dayCount).get(fixedIndex).add(text);
-		        	fixedIndex++;
-	        	}
-	        	else {
-	        		Log.d("TESTI", "Leffa ei mennyt listaan");
-	        	}
-	        	
+		        	// Check filters and show movies
+		        	if (!f.isFiltered(movies.get(dayCount).get(index))) {
+			        	childs.get(dayCount).add(new ArrayList<String>());
+				        
+			        	String text = "(" + movies.get(dayCount).get(index).showStartTimeH + ":" + movies.get(dayCount).get(index).showStartTimeM + ") " + movies.get(dayCount).get(index).title;
+			        	
+			        	childs.get(dayCount).get(fixedIndex).add(text);
+			        	fixedIndex++;
+		        	}
+		        	else {
+		        		//Log.d("TESTI", "Leffa ei mennyt listaan");
+		        	}
+		        }
 	        }
+	        catch (Exception ernu) {
+	        	Log.d("error", "generateview() caught an error");
+	        }
+	        
 	        
 	        dayCount++;
     	}
@@ -371,6 +400,8 @@ public class MainActivity extends Activity
      */
     private final boolean isUpdateNeeded()
     {
+		Log.d("functions", "isUpdateNeeded called");
+		
     	if (!leffaPrefs.getBoolean("DATA_LOADED", false)) {
     		setDataAsLoaded();
     		return true;
@@ -409,6 +440,8 @@ public class MainActivity extends Activity
      */
     private final void setDataAsLoaded()
     {
+
+		Log.d("functions", "setDataAsLoaded called");
     	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		prefsEditor.putBoolean("DATA_LOADED", true);
 		prefsEditor.putString("LAST_LOAD_DATE", sdf.format(new Date()));
@@ -417,10 +450,12 @@ public class MainActivity extends Activity
     
     /**
      * Invalidates current list data, calls for generateView() and forces the new data
-     * it into the layout.
+     * into the layout.
      */
     private final void refreshList()
     {
+		Log.d("functions", "refreshList called");
+		
 		groups.clear();
 		childs.clear();
 		

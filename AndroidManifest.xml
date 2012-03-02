@@ -23,7 +23,7 @@
                   android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
         <activity android:name=".PreferencesActivity"
-                  android:theme="@android:style/Theme.Black.NoTitleBar">
+                  android:theme="@android:style/Theme.Light.NoTitleBar">
         </activity>
 
     </application>

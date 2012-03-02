@@ -31,12 +31,13 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 				prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
 				prefsEditor.commit();
 			}
-		    else if (key.equals("FILTER_ACTIVE_SHOWN_SHOWS")) {
+		    else if (key.equals("FILTER_ACTIVE_ALREADY_SHOWN_MOVIES")) {
 		    	SharedPreferences leffaPrefs = getSharedPreferences("fi.leffat_preferences", MODE_WORLD_READABLE);
 				final SharedPreferences.Editor prefsEditor = leffaPrefs.edit();
 				prefsEditor.putBoolean("AREA_CODE_CHANGED", true);
 				prefsEditor.commit();
 		    }
+		    
 		    // Update the view with changed information
 		    updatePrefSummary(findPreference(key));
 	    }
@@ -44,6 +45,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         
         addPreferencesFromResource(R.xml.preferences);
         PreferenceManager.setDefaultValues(PreferencesActivity.this, R.xml.preferences, false);
@@ -71,19 +73,19 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
     	updatePrefSummary(findPreference(key));
     }
 
-    private void initSummary(Preference p){
-       if (p instanceof PreferenceCategory){
+    private void initSummary(Preference p) {
+    	if (p instanceof PreferenceCategory) {
             PreferenceCategory pCat = (PreferenceCategory)p;
-            for(int i=0;i<pCat.getPreferenceCount();i++){
+            for(int i=0;i<pCat.getPreferenceCount();i++) {
                 initSummary(pCat.getPreference(i));
             }
-        }else{
+        }
+        else {
             updatePrefSummary(p);
         }
-
     }
 
-    private void updatePrefSummary(Preference p){
+    private void updatePrefSummary(Preference p) {
         if (p instanceof ListPreference) {
             ListPreference listPref = (ListPreference) p; 
             p.setSummary(listPref.getEntry()); 
@@ -92,6 +94,5 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
             EditTextPreference editTextPref = (EditTextPreference) p; 
             p.setSummary(editTextPref.getText()); 
         }
-
     }
 } 

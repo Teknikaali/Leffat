@@ -28,30 +28,34 @@
     <string name="err_ostream">Ei voitu avata ulostuloa järjestelmään.</string>
     <string name="err_io_exception">Yllättävä IOException.</string>
     
-    <string name="settings_title">Asetukset</string>
+    <string name="settings_title">Settings</string>
     
-    <string name="areacodes">Valitse alue/teatteri</string>
-    <string-array name="areacode_array">
-        <item>Pääkaupunkiseutu</item>
-        <item>Espoo</item>
-        <item>Helsinki</item>
-        <item>Helsinki :: Kinopalatsi</item>
-        <item>Helsinki :: Maxim</item>
-        <item>Helsinki :: Tennispalatsi</item>
-        <item>Jyväskylä</item>
-        <item>Kuopio</item>
-        <item>Lahti</item>
-        <item>Oulu</item>
-        <item>Pori</item>
-        <item>Rovaniemi</item>
-        <item>Tampere</item>
-        <item>Tampere :: Cine Atlas</item>
-        <item>Tampere :: Plevna</item>
-        <item>Turku</item>
-        <item>Vantaa</item>
-    </string-array>
-    
-    <string name="year">Tuotantovuosi: </string>
+    <string name="year">Production year: </string>
     <string name="genre">Genre: </string>
+    
+    <!-- Preferences START -->
+    <string name="pref_category1">General</string>
+    <string name="pref_category2">Filter settings</string>
+    <string name="areacode_selection">Area selection</string>
+    <string name="hide_shown_shows">Hide already shown movies</string>
+    <!-- Preferences END -->
+    
+    <string name="set_time">"Time: "</string>
+    <string name="set_rating">"Rating: "</string>
+    <string name="set_genre">"Genre: "</string>
+    
+    <string name="rating_prompt">Rating</string>
+    
+    <string name="genre_prompt">Genre</string>
+
+    <string name="time_prompt">Start time</string>
+    
+    <!-- Content Descriptions -->
+    <string name="logoDescription">Logo image</string>
+    <string name="refreshDescription">Refresh-button image</string>
+    <string name="configDescription">Config-button image</string>
+    <string name="searchDescription">Search-button image</string>
+    
+    <string name="searchBarInitialText">Search bar</string>
     
 </resources>

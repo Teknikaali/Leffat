@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+@SuppressWarnings("unused")
 public class TimeChooserDialog extends Dialog
 {
 	private String ratingItem;

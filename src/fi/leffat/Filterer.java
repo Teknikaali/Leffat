@@ -18,6 +18,11 @@ public class Filterer
 	private SharedPreferences prefs;
 	
 	/**
+	 * Calendar for current hour
+	 */
+	Calendar rightNow;
+	
+	/**
 	 * Stores preferences
 	 * 
 	 * @param _prefs Shared preferences from context
@@ -25,6 +30,7 @@ public class Filterer
 	public Filterer(SharedPreferences _prefs)
 	{
 		prefs = _prefs;
+		rightNow = Calendar.getInstance();
 	}
 	
 	/**
@@ -117,7 +123,7 @@ public class Filterer
 		}
 		
 		// Check if shown shows-filter is active
-		if (prefs.getBoolean("FILTER_ACTIVE_SHOWN_SHOWS", false) == true) {
+		if (prefs.getBoolean("FILTER_ACTIVE_ALREADY_SHOWN_MOVIES", false) == true) {
 			int ref = Integer.parseInt(movie.showStartTimeH);
 			
 			// Check if filter matches the movie
